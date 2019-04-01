@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>系统消息-删除</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/system_messages.css" />
+    <style type="text/css">
+        .aui-list-item-inner.aui-swipe-handle {
+            overflow-x: hidden;
+            position: relative;
+            z-index: 1;
+            background-color: #ffffff;
+        }
+        .aui-swipe-btn {
+            position: absolute;
+            right: 0;
+            z-index: 0;
+            height: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-flex: 1;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+                    justify-content: space-between;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+                    align-items: center;
+        }
+        .aui-swipe-btn .aui-btn {
+            border-radius: 0;
+            height: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+                    align-items: center;
+
+        }
+        .donghua {
+            -webkit-transition-duration:300ms;
+            transition-duration:300ms;
+        }
+    </style>
+    <script>
+  var deviceWidth = document.documentElement.clientWidth;
+ if(deviceWidth > 750) {
+     deviceWidth = 750;
+ }
+ document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+	<div class="hd">
+		<a href="">
+			<img src="../image/2_03_03.png" alt="">系统消息
+	    </a>
+    </div>
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list">
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-swipe-handle">
+                       	<img src="../image/消息3.png" alt="" />
+                       	<div class="message_comment">
+                       		<p class="xt">系统消息</p>
+                       		<p>信息内容信息内容信息内容</p>
+                       	</div>
+                </div>
+                <div class="aui-swipe-btn">
+                    <div class="aui-btn aui-btn-danger">删除</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-swipe-handle" >
+                  	<img src="../image/消息3.png" alt="" />
+                       	<div class="message_comment">
+                       		<p class="xt">系统消息</p>
+                       		<p>信息内容信息内容信息内容</p>
+                       	</div>
+                </div>
+                <div class="aui-swipe-btn">
+                    <div class="aui-btn aui-btn-info">关闭</div>
+                    <div class="aui-btn aui-btn-danger">删除</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode>
+                <div class="aui-list-item-inner aui-swipe-handle">
+                   		<img src="../image/消息3.png" alt="" />
+                       	<div class="message_comment">
+                       		<p class="xt">系统消息</p>
+                       		<p>信息内容信息内容信息内容</p>
+                       	</div>
+                </div>
+                <div class="aui-swipe-btn">
+                    <div class="aui-btn aui-btn-info">关闭</div>
+                    <div class="aui-btn aui-btn-danger">删除</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/aui-list-swipe.js"></script>
+<script type="text/javascript">
+    // alert(document.body.offsetHeight)
+    var swipe = new auiListSwipe(function(ret){
+//         console.log(ret.dom)
+    });
+</script>
+</html>

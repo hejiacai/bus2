@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>立即评论</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/liji_comment.css" />
+  <script>
+  var deviceWidth = document.documentElement.clientWidth;
+ if(deviceWidth > 750) {
+     deviceWidth = 750;
+ }
+ document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+    <div class="hd">
+    	<a href="">
+      	<img src="../image/2_03_03.png" alt="">立即评价
+      </a>
+    </div>
+    <div class="photo">
+    	<img src="../image/头像.png" alt="" /><span>DF JH</span>
+    </div>
+    <div class="comment_detail">
+    	<form action="">
+	    	<textarea name="" rows="" cols="" class="comment_content" placeholder="请输入评价内容" id=''></textarea>
+	    	<div class="add">
+	    		<div class="add_pct">
+	    			<img src="../image/7.1png_03.png" alt="" />
+	    			<span>添加图片</span>
+	    			<input type="file" name="" id="up" value=""  multiple="multiple"/>
+	    		</div>
+	    		<div class="add_video">
+	    			<img src="../image/8.1png_05.png" alt="" />
+	    			<span class="">添加视频</span>   			
+	    		</div>
+	    	</div>
+    	</form>
+    </div>
+    <div class="dianzan">
+    	<p>
+    		<span>描述相符</span>
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星2@3x.png" alt="" />
+    		<img src="../image/星2@3x.png" alt="" />
+    	</p>
+    	<p>
+    		<span>描述相符</span>
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星2@3x.png" alt="" />
+    		<img src="../image/星2@3x.png" alt="" />
+    	</p>
+    	<p>
+    		<span>描述相符</span>
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星.png" alt="" />
+    		<img src="../image/星2@3x.png" alt="" />
+    		<img src="../image/星2@3x.png" alt="" />
+    	</p>
+    </div>
+    <div class="btb">
+      <button type="button" name="button" class="bt">保存</button>
+    </div>
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">		
+			var addBtn = document.querySelector('.add_pct');
+			addBtn.addEventListener('click',function () {
+			    document.querySelector('#up').value = null;
+			    document.querySelector('#up').click();
+			    return false;
+			},false);
+
+		// 处理input点击之后的change事件
+		document.getElementById("up").addEventListener("change",function(e){
+		    var files =this.files;
+		    var reader =new FileReader();
+		    reader.readAsDataURL(files[0]);
+		    reader.onload =function(e){
+		        var dx =(e.total/1024)/1024;
+		        if(dx>=2){
+		          alert("文件大小大于2M");
+		          return;
+		        }
+		        var result =this.result;//这里就是转化之后的DataURL
+		//      addBtn.style.backgroundImage = "url("+result+")";
+		      }
+//		      var rem =docadd_pctadd_pctadd_pctadd_pctadd_pctument.createElement("i");
+//		      rem.setAttribute("class","rems");
+//		      rem.innerHTML ="x";
+//		      document.querySelector(".img-d").appendChild(rem);
+//		      rem.addEventListener('click',function () {
+//		        this.style.display ="none";
+//		        addBtn.style.backgroundImage = "url(jia.jpg)";
+//		      });
+		})
+</script>
+</html>

@@ -1,0 +1,340 @@
+html,body{
+	background: rgb(234,233,238);
+}
+.hd{
+  width: 100%;
+  height: 1.3rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem!important;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+  margin-bottom: 0.1rem;
+}
+.hd a{
+	font-size: 0.36rem!important;
+}
+section{
+	width: 6.91rem;
+	height: 4rem;
+	background: #FFFFFF;
+	margin: auto;
+	border-radius: 0.1rem;
+	margin-bottom: 0.11rem;
+	margin-top: 0.3rem;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.ipt{
+	border-bottom: 1px solid;
+	border-bottom-color: #ddd;
+	display: flex;
+	align-items: center;
+	padding-left: 0.21rem;
+	width: 100%;
+	height: 1rem;
+}
+.ipt>span{
+	color: rgb(51,51,51);
+	font-size: 0.3rem;
+	display: inline-block;
+	width: 1.5rem;
+}
+.add_box{
+	font-size:0.3rem!important;
+	width: 77%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ipt input{
+	font-size: 0.3rem;
+	/*font-weight: bold;*/
+	color:rgb(51,51,51) ;
+	width: 75%;
+}
+.adress{
+	width: 6.91rem;
+	height: 0.98rem;
+	display: flex;
+	padding: 0 0.18rem 0 0.24rem;
+	justify-content: space-between;
+	background: #fff;
+	margin: auto;
+	border-radius: 0.1rem;
+	margin-bottom:0.2rem;
+}
+.aui-list-item-inner{
+	width: 100%;
+	display: flex;
+	/*padding: 0 0.18rem 0 0.24rem;*/
+	justify-content: space-between;
+	align-items: center;
+}
+.aui-list-item-input{
+	
+}
+.aui-switch{
+	width: 0.6rem;
+	height: 0.28rem;
+}
+.aui-switch:before{
+	height: 0.3rem;
+	width: 0.25rem;
+}
+.track {
+  position: relative;
+  background: #b7b7b7;
+  width: 0.6rem;
+  height: 0.28rem;
+  border-radius: 1.5rem;
+  padding: 0.01rem;
+  cursor: pointer;
+  background: rgb(249,25,117)!important;
+}
+.indicator {
+  position: relative;
+  background: #fff;
+  height: 97%;
+  width: 40%;
+  border-radius: 50%;
+}
+.indicator.switch-on {
+  -webkit-animation:           switch-on .3s;
+  -moz-animation:              switch-on .3s;
+  -o-animation:                switch-on .3s;
+  animation:                   switch-on .3s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode:    forwards;
+  -o-animation-fill-mode:      forwards;
+  animation-fill-mode:        forwards;
+}
+.ipt img{
+	width: 0.14rem;
+	height: 0.24rem;
+}
+.indicator.switch-off {
+  -webkit-animation:           switch-off .3s;
+  -moz-animation:              switch-off .3s;
+  -o-animation:                switch-off .3s;
+  animation:                   switch-off .3s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode:    forwards;
+  -o-animation-fill-mode:      forwards;
+  -animation-fill-mode:        forwards;
+}
+
+@-webkit-keyframes switch-on {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 60%;
+  }
+}
+@-moz-keyframes switch-on {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 60%;
+  }
+}
+@-o-keyframes switch-on {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 60%;
+  }
+}
+@keyframes switch-on {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: 60%;
+  }
+}
+
+@-webkit-keyframes switch-off {
+  0% {
+    margin-left: 60%;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+@-moz-keyframes switch-off {
+  0% {
+    margin-left: 60%;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+@-o-keyframes switch-off {
+  0% {
+    margin-left: 60%;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+@keyframes switch-off {
+  0% {
+    margin-left: 60%;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+.aui-list-item-label{
+	margin-right: 4.14rem;
+	font-size: 0.3rem;
+}
+.delete1{
+	width: 6.91rem;
+	height: 0.98rem;
+	background: #fff;
+	padding-left:0.23rem ;
+	color:rgb(245,75,117);
+	font-size: 0.3rem;
+	font-weight: bold;
+	line-height: 0.98rem;
+	margin: auto;
+	margin-bottom: 1.24rem;
+}
+.but{
+	width: 100%;
+	height: 1.03rem;
+	text-align: center;
+}
+.but button{
+	width: 6.1rem;
+	height: 100%;
+	background: rgb(216,53,96);
+	color: #fff;
+	font-size:0.3rem;
+	line-height: 1.03rem;
+	border-radius: 2rem;
+}
+.hui_se{
+	background: rgb(234,233,238)!important;
+}
+.hong_se{
+	background: rgb(216,53,96)!important;
+}
+.mui-poppicker-header{
+	    background: #fff;
+    height: 1rem;
+    text-align: center;
+    color: #333333;
+    font-size: .35rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.mui-poppicker-btn-ok{
+    position: absolute;
+    right: .75rem;
+    background: #fff;
+    border: 0.025rem solid #090909;
+    color: #090909;
+    border-radius: 5px;
+    width: 1.25rem;
+    height: .5rem;
+    padding: 0!important;
+    text-align: center;
+    line-height: .5rem;
+}
+.adres{
+	display: flex;
+	align-items: center;
+	
+}
+.adres img{
+	margin-right: .3rem;
+}
+.mui-poppicker-btn-cancel{
+	position: absolute;
+    left: .75rem;
+    background: #fff;
+    border: 0.025rem solid #090909;
+    color: #090909;
+    border-radius: 5px;
+    width: 1.25rem;
+    height: .5rem;
+    padding: 0!important;
+    text-align: center;
+    line-height: .5rem;
+}
+.backdrop{
+    position: fixed;
+    z-index: 998;
+    background-color: rgba(0,0,0,.3);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+.tips{
+	width: 4.5rem;
+	height: 2.45rem;
+	z-index: 999;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left: -2.25rem;
+	margin-top: -1.225rem;
+	background-color: white;
+	border-radius: 15px;
+	padding-top: 0.4rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	display: none;
+}
+.tips_content{
+	text-align: center;
+	font-size: 0.3rem;
+}
+.tips_content p{
+	font-weight: bold;
+	color: black;
+	font-size: 0.3rem;
+}
+.tips_content>span{
+	font-size: 0.28rem;
+}
+.tips_xuanze{
+	width: 100%;
+	height: 0.8rem;
+	border-top: 1px solid #DFDFDF;
+	display: flex;
+	
+}
+.tips_xuanze_div{
+	width: 50%;
+	height: 100%;
+	font-size: 0.3rem;
+	color: #F64570;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.tips_xuanze_div:first-child{
+	border-right: 1px solid #DFDFDF;
+}

@@ -1,0 +1,119 @@
+html,body{
+	background:rgb(234,233,238) ;
+}
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+  margin-bottom: 0.12rem;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.box_o{
+	margin-top: 0.2rem;
+}
+.fans{
+	width: 7rem;
+	height: 1.51rem;
+	border-radius: 0.1rem;
+	box-shadow: 0 0 1px 0 #ddd;
+	background: #fff;
+	margin: auto;
+	padding: 0.15rem 0.14rem 0 0.14rem;
+	display: flex;
+	margin-bottom: 0.2rem;
+	justify-content: space-around;
+}
+.fans_comment{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-right: 0.8rem;
+}
+.info_img{
+	width: 0.88rem;
+	height: 0.88rem;
+	margin-right:0.44rem ;
+}
+.fans p{
+	color: rgb(102,102,102);
+	font-size: 0.24rem;
+	margin-bottom: 0.08rem;
+	width: 3rem;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.nam{
+	font-size: 0.3rem!important;
+	font-weight: bold;
+	color: #333!important;
+}
+.mui-slider-handle{
+	display: flex;
+}
+.title{
+	font-size: 0.3rem;
+	color: rgb(51,51,51);
+	font-weight: bold;
+}
+.info_title_span{
+	font-size: 0.24rem;
+	color: rgb(51,51,51);
+}
+.change{
+	font-size: 0.24rem;
+	color: rgb(102,102,102);
+	width: 3rem;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.info_title{
+	display: flex;
+	flex-direction: column;
+}
+/*.mui-table-view-cell{
+	width: 7rem;
+	height: 1.51rem;
+	padding: ;
+}*/
+.mui-table-view{
+	background: rgb(234,233,238);
+	border: 0;
+	position: static;
+}
+.mui-table-view-cell{
+	border: 0;
+	width: 7rem;
+	height: 1.51rem;
+	background: #fff;
+	/*padding: 0.32rem 0 0 0.13rem;*/
+	padding: 0;
+	margin: 0 auto;
+	margin-bottom: 0.2rem;
+}
+.info_body{
+	border: 0;
+	margin-top: 0.2rem;
+}
+.mui-slider-handle{
+	height: 100%;
+	padding: 0.1rem 0 0 0.13rem;
+}
+/*.mui-table-view-cell{
+	padding: 0;
+}*/

@@ -1,0 +1,74 @@
+body{
+  background:#fff;
+  /*with:7.5rem;*/
+  padding-top: 3.3rem
+}
+.sjdl{
+  height: 0.48rem;
+  width: 100%;
+  font-size: 0.48rem ;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+.ip_sj{
+    width: 100%;
+    height:1rem;
+    padding: 0 0.3rem;
+    margin-bottom: 0.5rem;
+}
+.ip_sj input{
+    width: 100%;
+    height: 100%;
+    font-size:0.3rem!important;
+    border: 1px solid;
+    border-color: #eee;
+    padding-left: 0.23rem;
+    color:#ececec;
+}
+.sjh{
+  margin-bottom: 0.5rem ;
+}
+.ip_mm{
+  width: 100%;
+  height:1rem;
+  padding: 0 0.3rem;
+}
+.ip_mm input{
+    width: 100%;
+    height: 100%;
+    font-size:0.3rem!important;
+    border: 1px solid;
+    border-color: #eee;
+    padding-left: 0.23rem;
+    color:#9f9f9f;
+}
+.yzm{
+  width: 100%;
+  height: 0.94rem;
+  padding: 0.34rem 0.3rem 0.34rem 0.53rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.22rem;
+}
+.yzm a{
+  font-size: 0.24rem;
+  color: #c5c5c5!important;
+}
+.dl{
+  width: 6.06rem;
+  height: 1rem;
+  margin: auto;
+}
+.dl_b{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  line-height: 100%;
+  border-radius: 0.5rem;
+  background: #f34a74;
+  font-size: 0.3rem;
+  color: #fff;
+}

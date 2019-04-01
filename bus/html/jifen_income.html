@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>积分收入</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/jifen_income.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+//     if(deviceWidth > 750) {
+//         deviceWidth = 750;
+//     }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.count{
+  		overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  	}
+  	.currency_detail_content img{
+  			border-radius: 50%;
+  	}
+  </style>
+</head>
+<body>
+	<div class="head">
+		<!--<div class="hd">
+		  	<a href="transaction_amount.html">
+		     	<img src="../image/4_03.png" alt="">积分收入
+		    </a>
+		</div>-->
+		<div class="head_c">
+			<div class="count">
+			</div>
+			<span>积分收入</span>
+		</div>
+	</div>
+	<div class="currency_detail">
+		<img src="../image/能量详情@2x.png" alt="" />
+		<sppan>积分详情</sppan>
+	</div>
+	<div class="box_o" id='box_o'>
+		<script id="text" type="text/html">
+			{{each data as value i}}
+			<div class="currency_detail_content" data-index='{{i}}'>
+				<img src="{{value.headimgurl}}" alt="" />
+				<div class="currency_detail_content_c">
+					<span>{{value.nickname}}</span>
+					<span class="time">{{value.createtime}} {{value.content}}</span>
+				</div>
+			</div>
+			{{/each}}
+		</script>
+	</div>
+	
+</body>
+
+    <script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	   
+		    function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+			 var token=GetRequest('token');
+
+             var type='6'
+						$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/income_list",
+               data: {'token':token.token,'type':type}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+                        	
+                        	var html1 = template('text', data);
+                        	document.getElementById('box_o').innerHTML = html1;
+                        }
+
+
+                 }
+           })
+						
+						$.ajax({
+							type: "post",
+							url: "http://bus.liebianzhe.com/api/user/get_user_profit",
+							async: true,
+							data: {
+								token: token.token,
+							},
+							success: function(data) {
+								console.info(data);
+								if(data.code==1){
+									$(".count").html(data.data.jf+"分");
+								}
+							},
+							error: function() {
+								console.info("请求失败~");
+							}
+						});
+</script>
+</html>
+

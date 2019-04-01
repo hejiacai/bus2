@@ -1,0 +1,45 @@
+html,body{
+  /*background:#eae9ee;*/
+}
+.hd{
+  width: 100%;
+  height: 1.3rem;
+  padding: 0.58rem 0 0.2rem 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  color: #000000;
+  background: #fff;
+  margin-bottom: 0.96rem;
+}
+.hd img{
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-right: 2.1rem;
+}
+.gg{
+  width: 6.9rem;
+  height: 3.14rem;
+  margin:auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.05rem;
+  font-weight: bold;
+}
+.gg span{
+  font-size: 0.24rem;
+  color: #666666;
+}
+.df{
+  margin-top:0.2rem;
+  margin-bottom:0.52rem;
+}
+.gg img{
+	width: 1.32rem;
+	height: 1.32rem;
+	margin-top: -1.4rem;
+}

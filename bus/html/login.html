@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登录</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/login.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+	<div class="img">
+		<img src="../image/logo@2x.png" alt="" />	
+	</div>
+	<p class="lg">L O G O</p>
+	<div class="but">
+		<button>注册</button>
+	</div>
+	<div class="login">
+		<div class="sj_login">
+			<a href="shouji_login.html"><img src="../image/手机登录.png" alt="" /><span>手机登录</span></a>
+		</div>
+		<div class="wx_login">
+			<img src="../image/微信登录.png" alt="" /><span>微信</span>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+ <script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	$('.track').click( function(){
+    $indicator = $('.indicator');
+    if( $indicator.hasClass('switch-on') ) {
+        $indicator.removeClass('switch-on').addClass('switch-off');
+        }
+    else {
+        $indicator.removeClass('switch-off').addClass('switch-on');
+    }
+});
+
+		$(function(){
+			weixinLogin: function(){
+        //    判断 是否在Android 或 IOS，如果两者都不是，那就是在浏览器
+	var u = navigator.userAgent;
+	        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+	        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	        var state_num = Math.ceil(Math.random()*100000 + 900000);//设置随机数产生 state
+	        var redirect_url = encodeURI('http://xxxx/WeChatLogin.do');//写一个GET接口，获取state和code
+	        if(isAndroid){
+	               // 如果是在 android 写一个方法android.actionFromJs(state_num);传入随机数，返回1，如果返回值不是1 ，那就是在手机普通浏览器内了
+	        	var tt = android.actionFromJs(state_num);
+	        	if( tt !== 1 || tt !=='1'){
+	        	$("#login_container").html('请到PC端进行微信登录');
+	        	$("#login_container").addClass('active');
+	   				$(".mask").show();
+	        														}
+	        }else if(isiOS){
+	              //IOS是一样的，native代码那边就直接请求微信的移动应用登录，注意！！appid 和 serect 都是不一样的哦
+	        var tt = applaction(state_num);
+	        if( tt !== 1 || tt !=='1'){
+	        $("#login_container").html('请到PC端进行微信登录');
+	        $("#login_container").addClass('active');
+	   $(".mask").show();
+	        }
+	        }else{
+	              //两者都不是就是在电脑端浏览器打开的了，那就执行微信网站应用的扫码登录
+	      $("#login_container").addClass('active');
+	$(".mask").show();
+	$utils.set_cookie('state',state_num+'wap');
+	var obj = new WxLogin({
+	id:"login_container", 
+	       appid: "xxx", 
+	       scope: "snsapi_login", 
+	       redirect_uri: redirect_url,
+	       state: state_num+'wap', // 当是在浏览器进行扫码登录时，我给随机数加了一个wap，以识别是 移动应用登录 还是 网站应用登录，上面获取 state 和 code的接口就能执行接下来的操作，因为接下来的操作是一样的，全部都在后端执行的话，重要信息就不会暴露在浏览器上。
+	       style: "black",
+	       href: ""
+   	});
+        }
+	},
+			
+		})
+</script>
+</html>

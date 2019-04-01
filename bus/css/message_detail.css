@@ -1,0 +1,42 @@
+.hd{
+  width: 100%;
+  height: 1.28rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #fff!important;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  align-items: center;
+  color: #000000;
+  margin-bottom: 0.15rem;
+}
+.hd a{
+	/*display: flex;
+	color: #fff!important;*/
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.tle{
+	font-size: 0.4rem;
+	margin-bottom: 0.1rem;
+	text-align: center;
+	/*font-weight: bold;*/
+}
+.dec{
+	font-size: 0.3rem;
+	margin-bottom: 0.2rem;
+	padding: 0 0.1rem;
+	text-align: center;
+}
+.con{
+	font-size: 0.3rem;
+}
+.box p{
+	font-size: 0.3rem;
+	text-align: start!important;
+	padding: 0 0.1rem;
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>全部评论</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script>
+		    document.documentElement.style.fontSize =document.documentElement.clientWidth/750*40 +"px";
+		</script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/imageview.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/all_comment.css" />
+		<style>
+			video::-internal-media-controls-download-button {
+			    display:none;
+			}
+			 
+			video::-webkit-media-controls-enclosure {
+			    overflow:hidden;
+			}
+			 
+			video::-webkit-media-controls-panel {
+			    width: calc(100% + 30px); /* Adjust as needed */
+			}
+			#video{
+			    object-fit: fill;
+			}			
+		</style>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left" href="commodity_details.html"></a>
+		    <h1 class="mui-title">全部评论</h1>
+		</header>-->
+		<div class="mui-content" id="content">
+		    
+		    
+		   
+		</div>
+		<script type="text/html" id="text">
+			{{each data as value i}}
+			<div class="comment_div">
+		    	<div class="comment_title">
+		    		<div class="title_left">
+		    			<img  src="{{value.headimgurl}}"/>
+		    			<span>{{value.nickname}}</span>
+		    		</div>
+		    		<span class="title_right">{{value.createtime}}</span>
+		    	</div>
+		    	<div class="comment_content">
+		    		{{value.content}}
+		    	</div>
+		    	<div class="comment_img">
+		    		{{each value.pic as v v1}}
+		    			<img src="{{v}}" data-preview-src="" data-preview-group="{{i}}"/>
+		    		{{/each}}
+		    		
+		    	</div>
+		    </div>
+		    {{/each}}
+		     <div class="no_more">没有更多了</div>
+		</script>
+		<script type="text/javascript" src="../script/art-template.js" ></script>
+		<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="../script/common.js"></script>
+		<script src="../script/mui.min.js"></script>
+		<script type="text/javascript" src="../script/mui.previewimage.js"></script>
+		<script type="text/javascript" src="../script/mui.zoom.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		    mui.previewImage();
+			var token;
+			var gid;
+			$(function(){
+				token=getUrlParam("token");
+				gid=getUrlParam("gid");
+				$.ajax({
+					type:"post",
+					url:"http://bus.liebianzhe.com/api/order/all_evaluate",
+					async:true,
+					data:{
+						token:token,
+						gid:gid,
+					},
+					success:function(data){
+						console.info(data);
+						if(data.code==1){
+							var html = template('text',data);
+							document.getElementById('content').innerHTML = html;
+						}else{
+							mui.toast(data.msg);
+						}
+					},
+					error:function(){
+						console.info("请求失败~");
+					}
+				});
+				
+			})
+			function getUrlParam(name){
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+			}
+			function video_play(t){
+				document.getElementById("video").play();
+//				console.info("aaa");
+			}
+		</script>
+				
+	</body>
+
+</html>

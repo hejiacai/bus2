@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>绿色能量充值</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script>
+		    document.documentElement.style.fontSize =document.documentElement.clientWidth/750*40 +"px";
+		</script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/recharge_gp.css" />
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+		    <a class=" mui-pull-left" onclick="back()">
+		    	<img src="../image/address_back.png"/>
+		    </a>
+		    <h1 class="mui-title">绿色能量充值</h1>
+		</header>-->
+		<div class="mui-content">
+			<section>
+			    <div class="recharge_content">
+			    	<div class="content_div"><span class="jiner">100</span>个</div>
+			    	<div class="content_div"><span class="jiner">200</span>个</div>
+			    	<div class="content_div"><span class="jiner">300</span>个</div>
+			    	<div class="content_div"><span class="jiner">400</span>个</div>
+			    	<div class="content_div"><span class="jiner">500</span>个</div>
+			    	<div class="content_div"><span class="jiner">600</span>个</div>
+			    </div>
+			    <div class="ratio">
+			    	<span>今日绿能能量比列</span>
+			    	<span>1:<span id="price"></span></span>
+			    </div>
+			</section>
+	    	<div class="div_button">
+	    		<button type="button" id="sub">确定</button>
+	    	</div>
+		</div>
+		<script src="../script/mui.min.js"></script>
+		<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="../script/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			//充值数量
+			var num=0;
+			var token;
+			//单价
+			var price;
+			$(function(){
+				token=getUrlParam("token");
+                $.ajax({
+                	type:"post",
+                	url:"http://bus.liebianzhe.com/api/user/get_plat",
+                	async:true,
+                	data:{
+                		token:token,
+                		type:4
+                	},
+                	success:function(data){
+                		console.info(data);
+                		if(data.code==1){
+                			$("#price").html(data.data.price*1);
+                			price=data.data.price*1;
+                		}else{
+                			mui.toast(data.msg);
+                		}
+                	},
+                	error:function(){
+                		console.info("请求失败~");
+                	}
+                });
+                
+			})
+			
+			$(".content_div").on('tap',function(){
+				$(this).addClass('jr_active').siblings().removeClass('jr_active');
+				num=$(this).children(".jiner").html();
+				console.info(num);
+			})
+			
+			$("#sub").on('tap',function(){
+				if(num==0){
+					mui.toast("请选择充值的数量~");
+					return false;
+				}
+				//总价
+				var all_price=num*price;
+				$.ajax({
+					type:"post",
+					url:"http://bus.liebianzhe.com/api/user/recharge",
+					async:true,
+					data:{
+						token:token,
+						type:1,
+						price:all_price,
+						one_price:price,
+                        gpower_number:num
+					},
+					success:function(data){
+						console.info(data);
+						if(data.code==1){
+							var ordernum=data.data.ordernum;
+							window.location.href="jump_pay.html?token="+token+"&ordernum="+ordernum;
+						}else{
+							mui.toast(data.msg);
+						}
+					},
+					error:function(){
+						console.info("充值失败");
+					}
+				});
+			})
+			function getUrlParam(name){
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+			}
+		</script>
+	</body>
+
+</html>

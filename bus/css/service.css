@@ -1,0 +1,72 @@
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.time{
+	font-size: 0.18rem;
+	text-align: center;
+	margin-top: 0.26rem;
+	color: #333;
+	margin-bottom: 0.45rem;
+}
+.customer_service{
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.1rem;
+}
+.customer_service img{
+	width: 0.94rem;
+	height: 0.94rem;
+	margin-right: 0.12rem;
+	margin-left: 0.31rem;
+}
+.customer_service span{
+	width: 5.43rem;
+	height: 0.81rem;
+	background:rgb(237,237,237) ;
+	font-size: 0.26rem;
+	color: #333;
+	display: inline-block;
+	line-height: 0.81rem;
+	padding-left: 0.08rem;
+	border-radius: 0.05rem;
+}
+.customer{
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.1rem;
+	justify-content: flex-end;
+}
+.customer img{
+	width: 0.94rem;
+	height: 0.94rem;
+	margin-right: 0.31rem;
+}
+.customer span{
+	margin-right: 0.12rem;
+	width: 5.43rem;
+	height: 1.05rem;
+	background:rgb(249,78,120) ;
+	font-size: 0.26rem;
+	color: rgb(255,255,255);
+	display: inline-block;
+	line-height: 0.81rem;
+	padding-left: 0.1rem;
+	border-radius: 0.05rem;
+}

@@ -1,0 +1,147 @@
+html,body{
+	background: rgb(234,233,238);
+}
+.hd{
+  width: 100%;
+  height: 1.3rem;
+  padding: 0.3rem 0 0.23rem 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.photo{
+	width: 100%;
+	height: 1.95rem;
+	display: flex;
+	align-items: center;
+	padding-left: 0.34rem;
+	background: #fff;
+	margin-bottom: 0.06rem;
+}
+.photo img{
+	width: 1.32rem;
+	height: 1.32rem;
+	margin-right: 0.33rem;
+}
+.photo span{
+	font-size: 0.3rem;
+	color: #333;
+	font-weight: bold;
+}
+.comment_detail{
+	width: 100%;
+	height: 3.37rem;
+	background: #fff;
+	margin-bottom: 0.06rem;
+	padding: 0.28rem;
+}
+.comment_content{
+	width: 100%;
+	height: 50%;
+}
+.nr{
+	color: rgb(152,152,152);
+	font-size: 0.24rem;
+}
+.add{
+	width: 100%;
+	display: flex;
+	margin-right: 0.34rem;
+}
+.add_pct{
+	width: 1.32rem;
+	height: 1.32rem;
+	border: 1px dashed;
+	border-color: #ddd;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-right: 0.34rem;
+}
+#up{
+	display: none;
+}
+.add_pct input{
+	width: 100%;
+	height: 100%;
+}
+.add_pct img{
+	width: 0.61rem;
+	height: 0.49rem;
+	margin-bottom: 0.22rem;
+}
+.add_pct span{
+	font-size: 0.18rem;
+	color: #ddd;
+}
+.add_video{
+	align-items: center;
+	justify-content: center;
+	width: 1.32rem;
+	height: 1.32rem;
+	border: 1px dashed;
+	border-color: #ddd;
+	display: flex;
+	flex-direction: column;
+}
+.add_video img{
+	width: 0.61rem;
+	height: 0.49rem;
+	margin-bottom: 0.22rem;
+}
+.add_video span{
+	font-size: 0.18rem;
+	color: #ddd;
+}
+/*#srnr::-webkit-input-placeholder{
+	font-size: 0.3rem;
+}*/
+.dianzan{
+	width: 100%;
+	height: 3.05rem;
+	background: #fff;
+	padding: 0.39rem 0.3rem;
+	margin-bottom: 1.4rem;
+}
+.dianzan p{
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.27rem;
+}
+.dianzan p span{
+	color: rgb(51,51,51);
+	font-size: 0.24rem;
+	margin-right: 0.21rem;
+}
+.dianzan p img{
+	width: 0.36rem;
+	height: 0.34rem;
+	margin-right: 0.21rem;
+}
+.btb{
+	width: 100%;
+	height: 1.03rem;
+	text-align: center;
+}
+.bt{
+	width: 6.1rem;
+	height: 100%;
+	border-radius:0.2rem ;
+	background: rgb(226,60,102);
+	color: #fff;
+	font-size: 0.3rem;
+	line-height: 1.03rem;
+}

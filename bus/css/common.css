@@ -1,0 +1,85 @@
+/*html,input,textarea,button,body{
+	font-size: 50px!important;
+	}*/
+*{
+    font-family: 'Hiragino Sans GB W3';
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+html{
+    font-family: 'Hiragino Sans GB W3';
+
+}
+html{
+	line-height: initial;
+}
+body{
+	font-size: 0.32rem;
+}
+/*body{
+	font-size: 0.65rem;
+  background:#fff;
+  width:7.5rem!important;
+}*/
+input{
+    outline:none;
+    background: none;
+    border: 0;
+}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+    color:#98989c;
+    font-size: .3rem;
+}
+input::-moz-placeholder,textarea:-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#98989c;
+    font-size: .3rem;
+}
+input:-moz-placeholder,textarea::-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#98989c;
+    font-size: .3rem;
+}
+input:-ms-input-placeholder,textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+    color:#98989c;
+    font-size: .3rem;
+}
+
+a:link{text-decoration: none!important;  }
+a:visited{text-decoration: none!important;  }
+a:hover{text-decoration: none!important;  }
+a:active{text-decoration: none!important;  }
+a:focus{text-decoration: none!important;  }
+input[type=number] {
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+textarea{
+    outline:none;
+    font-size: 0.3rem;
+}
+textarea::-webkit-input-placeholder{
+    color:#98989c;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#98989c;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#98989c;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+    color:#98989c;
+}
+ul,li{
+    list-style: none;
+}
+.hd a{
+	display: flex;
+	align-items: center;
+	color: #333;
+}
+.mui-toast-container{
+	width: 80%;
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>广告主</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/advertiser.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+		<div class="hd">
+		  	<a href="">
+		     	<img src="../image/2_03_03.png" alt="">
+		    </a>
+		    <span>广告主</span>
+	     	<a href="" class="tf">查看我的投放</a>
+		</div>
+		<div id="aui-slide">
+		    <div class="aui-slide-wrap" >
+		        <div class="aui-slide-node bg-dark">
+		            <img src="../image/广告图5@2x.png" />
+		        </div>
+		        <div class="aui-slide-node bg-dark">
+		            <img src="../image/广告图5@2x.png" />
+		        </div>
+		        <div class="aui-slide-node bg-dark">
+		            <img src="../image/广告图5@2x.png" />
+		        </div>
+		    </div>
+		    <div class="aui-slide-page-wrap"><!--分页容器--></div>
+		</div>
+		<div class="int">
+			<input type="" name="" id="message" value="" placeholder="请输入您的广告词"/>
+		</div>
+		<div class="tfts">
+			<img src="../image/1@2x.png" alt="" /><span>选择投放条数</span>
+		</div>
+		<section>
+			<div class="tfts_detail">
+				<div class="tfts_detail_sp">
+					<span class="count">500条</span>
+					<span class="yuan">60(元)</span>
+				</div>
+				<div class="tfts_detail_sp">
+					<span class="count">500条</span>
+					<span class="yuan">60(元)</span>
+				</div>
+				<div class="tfts_detail_sp">
+					<span class="count">500条</span>
+					<span class="yuan">60(元)</span>
+				</div>
+			</div>
+			<div class="int">
+				<input type="" name="" id="num" value="" placeholder="其他条数  (一条6毛钱计算)"/>
+			</div>
+		</section>
+		<button class="tj">立即提交</button>
+		<script type="text/html" id="dataList">
+ 				
+		</script>
+</body>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript">
+//	   $(template("dataList", data)
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        // "width":300,
+        "height":260,
+        "speed":300,
+        "pageShow":true,
+        "pageStyle":'dot',
+        "autoPlay": 0, //自动播放
+        "loop":true,
+        'dotPosition':'center',
+//      currentPage:currentFun
+    })
+
+    function currentFun(index) {
+        console.log(index);
+    }
+    var slide2 = new auiSlide({
+        container:document.getElementById("aui-slide2"),
+        // "width":300,
+        "height":240,
+        "speed":300,
+        "autoPlay": 0, //自动播放
+        "pageShow":true,
+        "loop":true,
+        "pageStyle":'dot',
+        'dotPosition':'center'
+    })
+    var slide3 = new auiSlide({
+        container:document.getElementById("aui-slide3"),
+        // "width":300,
+        "height":240,
+        "speed":500,
+        "autoPlay": 3000, //自动播放
+        "loop":true,
+        "pageShow":true,
+        "pageStyle":'line',
+        'dotPosition':'center'
+    })
+    console.log(slide3.pageCount());
+</script>
+</html>

@@ -1,0 +1,88 @@
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.section{
+	padding-left: 0.3rem;
+	margin-bottom: 0.82rem;
+}
+.modification_head{
+	border-bottom: 1px solid;
+	border-bottom-color: #ddd;
+	height: 1.88rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+.modification_head img{
+	width: 1.26rem;
+	height: 1.26rem;
+	margin-right: 3.76rem;
+}
+.modification_head a{
+	font-size: 0.3rem;
+	font-weight: bold;
+	color: rgb(51,51,51)!important;
+}
+.nickname{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid;
+	border-bottom-color: #ddd;
+	height: 1rem;
+	width: 100%;
+	align-items: center;
+}
+.nickname a{
+	color: rgb(152,152,154)!important;
+	margin-right: 0.3rem;
+}
+.nickname span{
+	font-size: 0.3rem;
+	font-weight: bold;
+	margin-right: 0.3rem;
+}
+.ipt{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid;
+	border-bottom-color: #ddd;
+	height: 1rem;
+	width: 100%;
+	align-items: center;
+}
+.ipt a{
+	color: rgb(152,152,154)!important;
+	margin-right: 0.3rem;
+}
+.button{
+	width: 100%;	
+	height: 1.03rem;
+	text-align: center;
+}
+.button button{
+	width: 6.1rem;
+	height: 100%;
+	text-align: center;
+	line-height: 1.03rem;
+	background: rgb(249,78,120);
+	color: #fff;
+	border-radius: 2rem;
+	font-size:0.3rem ;
+}

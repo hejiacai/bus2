@@ -1,0 +1,55 @@
+body{
+  background: #fff;
+}
+.hd{
+  width: 100%;
+  height: 1.3rem;
+  padding: 0.58rem 0 0.23rem 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  color: #000000;
+  background: #fff;
+}
+.hd img{
+  margin-right: 2.1rem;
+}
+.gg{
+  width: 100%;
+  height: 2.4rem;
+  display: flex;
+  padding: 0 0.3rem;
+  border-top: 1px solid;
+  border-color: #eee;
+  align-items: center;
+}
+.gg img{
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.9rem;
+}
+.ggbt{
+  display: flex;
+  flex-direction: column;
+}
+.gbt{
+  font-size: 0.3rem;
+  color: #333333;
+  font-weight: bold;
+}
+.jqsz{
+  font-size: 0.24rem;
+  color: #666666;
+  margin-bottom: 0.25rem;
+}
+.ts{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.ts span{
+  font-size: 0.24rem;
+  font-weight: bold;
+  color: #333;
+}

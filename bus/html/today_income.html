@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>今日收益</title>
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/today_income.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/today_income.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+//     if(deviceWidth > 750) {
+//         deviceWidth = 750;
+//     }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.currency_detail_content img{
+  			border-radius: 50%;
+  	}
+  </style>
+</head>
+<body>
+	<div class="head">
+		<!--<div class="hd">
+		  	<a href="">
+		     	<img src="../image/4_03.png" alt="">今日收益
+		    </a>
+		</div>-->
+		<div class="head_c">
+			<div class="head_c_b">
+				<div class="count">
+				</div>
+				<span>今日收益</span>
+			</div>
+			<div class="gmnl">
+				<button type="button" onclick="tixian()">提现</button>
+				<button type="button" onclick="trade()">6折购买能量</button>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="currency_detail">
+		<img src="../image/能量详情@2x.png" alt="" />
+		<span>收入详情</span>
+	</div>
+		<div class="box_o" id='box_o'>
+  	<script type="text/html" id="text">
+			{{each data as value i}}
+				<div class="currency_detail_content">
+					<img src="{{value.headimgurl}}" alt="" />
+					<div class="currency_detail_content_c">
+						<span>{{value.nickname}}</span>
+						<span class="time">{{value.createtime}}{{value.content}}</span>
+					</div>
+				</div>
+	  	{{/each}}
+		</script>
+  </div>
+	
+	<!--<div class="currency_detail_content">
+		<img src="../image/头像.png" alt="" />
+		<div class="currency_detail_content_c">
+			<span>Dero Hu</span>
+			<span class="time">2018-11-5 广告收入3元</span>
+		</div>
+	</div>
+	<div class="currency_detail_content">
+		<img src="../image/头像.png" alt="" />
+		<div class="currency_detail_content_c">
+			<span>Dero Hu</span>
+			<span class="time">2018-11-5 广告收入3元</span>
+		</div>
+	</div>-->
+</body>
+
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	   	//是否绑定银行卡，0为未绑定，1为已绑定.默认为0；
+	   var bank_type=0;
+	   //是否绑定支付宝，0为未绑定，1为已绑定.默认为0；
+	   var alipay_type=0;
+	   //提现金额
+	   var price;
+		    function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+			 var token=GetRequest('token');
+
+             var type='4'
+						$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/income_list",
+               data: {'token':token.token,'type':type}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+                        	
+                        	var html1 = template('text', data);
+                        	document.getElementById('box_o').innerHTML = html1;
+                        }
+
+
+                 }
+           })
+					$.ajax({
+						type: "post",
+						url: "http://bus.liebianzhe.com/api/user/get_user_data",
+						async: true,
+						data: {
+							token: token.token,
+						},
+						success: function(data) {
+							console.info(data);
+							if(data.code==1){
+								price=data.data.balance;
+								$(".count").html(data.data.dayprice+"个");
+								if(data.data.alipay_id){
+											alipay_type=1;
+									}
+									if(data.data.bank_card){
+											bank_type=1;
+									}
+								var session=window.sessionStorage;
+									var bd_type={};
+									bd_type["alipay_type"]=alipay_type;
+									bd_type["bank_type"]=bank_type;
+									session.setItem("bd_type",JSON.stringify(bd_type));
+							}
+						},
+						error: function() {
+							console.info("请求失败~");
+						}
+					});
+					
+					function tixian(){
+						if(price==0){
+								mui.toast("提现金额不足");
+								return false;
+						}
+							window.location.href="withdraw_center.html?token="+token.token+"&type=1";
+					}
+					function trade(){
+							window.location.href="green_energy.html?token="+token.token+"&trade_type=1"
+					}
+</script>
+</html>

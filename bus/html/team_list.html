@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>团队列表</title>
+  <link href="../css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/my_team.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	html,body{
+  		margin: 0;
+  		overflow-x: hidden;
+  	}
+  	.yh{
+  		margin-right: 1.6rem;
+  	}
+  	section{
+  		margin-bottom: 0;
+  		margin-top: 0.19rem;
+  	}
+  </style>
+</head>
+<body>
+	
+	<div id="content">
+					
+	</div>
+	
+	
+</body>
+<script id="text" type="text/html">
+		{{each data as value i}}
+		<section>
+				<div class="section_head">
+						<img src="{{value.headimgurl}}" alt="" class="img" style="border-radius: 50%;"/>
+						<div class="yh">
+							<p class="mz">{{value.nickname}}</p>
+							{{if value.type==1}}
+							<p class="lb">类别: 一级用户</p>
+							{{else if value.type==2}}
+							<p class="lb">类别: 二级用户</p>
+							{{/if}}
+						</div>
+						<div class="time">
+							<img src="../image/team_time.png" alt="" />
+							<span>{{value.add_time}}</span>
+						</div>
+				</div>
+				<div class="section_content">
+						<div class="section_content_sp">
+							<span class="xj">绿色能量获得</span>
+							<span class="mun">{{value.gpower}}</span>
+						</div>
+						{{if value.balance!=null}}
+						<div class="section_content_sp">
+							<span class="xj">现金奖励{{value.balance}}</span>
+							<span class="mun">{{value.balance}}</span>
+						</div>
+						{{/if}}
+						<div class="section_content_sp">
+							<span class="xj">他的团队</span>
+							<span class="mun">{{value.all_num}}人</span>
+						</div>
+				</div>
+		</section>
+		{{/each}}
+</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script>
+		var token;
+		var tema_type;
+		$(function(){
+			token=getUrlParam("token");
+			tema_type=getUrlParam("tema_type");
+			if(tema_type==0){
+				$.ajax({
+					type: "post",
+					url: "http://bus.liebianzhe.com/api/user/one_team_list",
+					async: true,
+					data: {
+						token:token,
+					},
+					success: function(data) {
+							console.info(data);
+							if(data.code==1){
+								if(data.data.length==0){
+									mui.toast("您目前还没有一级团队~");
+								}else{
+									var html = template('text',data);
+									document.getElementById('content').innerHTML = html;
+								}
+							}
+					},
+					error: function() {
+						console.info("请求失败~");
+					}
+				});
+			}else if(tema_type==1){
+				$.ajax({
+					type: "post",
+					url: "http://bus.liebianzhe.com/api/user/second_team_list",
+					async: true,
+					data: {
+						token:token,
+					},
+					success: function(data) {
+							console.info(data);
+							if(data.code==1){
+								if(data.data.length==0){
+									mui.toast("您目前还没有二级团队~");
+								}else{
+									var html = template('text',data);
+									document.getElementById('content').innerHTML = html;
+								}
+							}
+					},
+					error: function() {
+						console.info("请求失败~");
+					}
+				});
+			}
+			
+		})
+		
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>

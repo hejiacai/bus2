@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>广告主列表</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/search_guanggao_put.css" />
+  <link rel="stylesheet" type="text/css" href="../css/guanggao_put.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	html,body,#content,.message_body{
+  		width: 100%;
+			height: 100%;
+  	}
+  		.guanggao_detail:first-child{
+  				
+  		}
+  		.message_body{
+  				background-color: white;
+  				padding-top: 0.5rem;
+  		}
+  		.guanggao_body{
+  				padding-top: 0.2rem;
+  		}
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+  	<a href="">
+     	<img src="../image/2_03_03.png" alt="">系统消息
+    </a>
+  </div>-->
+  <div id="content"></div>
+  
+</body>
+<script type="text/html" id="text">
+	{{if code==1}}
+		<div class="guanggao_body">
+			{{each data as value i}}
+			<div class="guanggao_detail">
+		  		<div class="guanggao_name">
+		  			<span class="guanggao_name_sp">{{value.title}}</span>
+		  			<span class="coumt">剩余条数:  {{value.surplusnum}}条</span>
+		  		</div>
+		  		<span class="time">投放时间:   {{value.createtime}}</span>
+		  </div>
+		  {{/each}}
+		</div>
+  {{else if code==0}}
+	  <div class="message_body">
+	  		<div class="img">
+					<img src="../image/暂无(1).png" alt="" />
+			  </div>
+			  <p class="message">您目前暂无投放</p>
+	  </div>
+  
+  {{/if}}
+</script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script>
+		var token;
+		$(function(){
+				token=getUrlParam("token");
+				$.ajax({
+						type: "post",
+						url: "http://bus.liebianzhe.com/api/user/user_advert",
+						async: false,
+						data: {
+							token:token,
+							page:1,
+							pageSize:10
+						},
+						success: function(data) {
+								console.info(data);
+								if(data.code==1){
+									
+									var html = template('text',data);
+									document.getElementById('content').innerHTML = html;
+								}
+						},
+						error: function() {
+							console.info("请求失败~");
+						}
+				});
+		})
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>

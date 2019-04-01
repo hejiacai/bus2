@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>发放规则</title>
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/change_pay_psw.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  		body,.mui-content{
+  			background-color: white;
+  		}
+  		.mui-conten{
+  				padding: 0 0.75rem;
+  				padding-top: 0.5rem;
+  		}
+  		.mui-conten p{
+  				color: black;
+  		}
+  </style>
+</head>
+<body>
+	<div class="mui-conten" id="content"></div>
+</body>
+<script id="text" type="text/html">
+		{{#data}}
+</script>
+<script type="text/javascript" src="../script/mui.min.js" ></script>
+<script type="text/javascript" src="../script/art-template.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script>
+		var token;
+		$(function(){
+			token=getUrlParam("token");
+			$.ajax({
+				type:"post",
+				url:"http://bus.liebianzhe.com/api/login/rule",
+				async:true,
+				data:{
+					type:1
+				},
+				success:function(data){
+					console.info(data);
+					if(data.code==1){
+							var html = template('text',data);
+							document.getElementById('content').innerHTML = html;
+					}else{
+							mui.toast(data.msg);
+					}
+				},
+				error:function(){
+					console.info("请求失败~");
+				}
+			});
+		})
+		
+		
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+		
+</script>
+</html>

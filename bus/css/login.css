@@ -1,0 +1,70 @@
+.img{
+	margin-top: 1.58rem;
+	width: 100%;
+	height: 2.13rem;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.54rem;
+}
+.img img{
+	width: 2.33rem;
+	height: 2.13rem;
+}
+.lg{
+	width: 100%;
+	height: 0.38rem;
+	text-align: center;
+	font-size: 0.48rem;
+	color: rgb(249,78,120);
+	font-weight: bold;
+	margin-bottom: 1.46rem;
+}
+.but{
+	width: 100%;
+	height: 1.03rem;
+	text-align: center;
+	margin-bottom: 0.68rem;
+}
+.but button{
+	width: 6.1rem;
+	height: 100%;
+	background:rgb(216,53,96) ;
+	border-radius: 2rem;
+	color: #fff;
+	font-size: 0.3rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.03rem;
+}
+.login{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	padding: 0 1.03rem 0 0.93rem;
+}
+.sj_login{
+	display: flex;
+	align-items: center;
+	margin-right: 2rem;
+}
+.sj_login a{
+	display: flex;
+}
+.sj_login img{
+	width: 0.36rem;
+	height: 0.52rem;
+	margin-right: 0.31rem;
+}
+.wx_login{
+	display: flex;
+	align-items: center;
+}
+.wx_login img{
+	width: 0.65rem;
+	height: 0.53rem;
+	margin-right: 0.31rem;
+}
+.login span{
+	color: rgb(51,51,51);
+	font-size: 0.3rem;
+}

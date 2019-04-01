@@ -1,0 +1,175 @@
+html,body{
+	background: rgb(234,233,238);
+}
+.box{
+	width: 100%;
+	height: 4.13rem;
+	background:#eae9ee;
+	margin-bottom: 0.75rem;
+}
+.head{
+	position: relative;
+	width: 100%;
+	height: 2.85rem;
+	background:rgb(233,66,108) ;
+	margin-bottom: 3rem;
+}
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #fff!important;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  margin-bottom: 0.15rem;
+}
+.hd a{
+	color: #fff!important;
+	display: flex;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.head_c{
+	position: absolute;
+	width: 7rem;
+	height: 3.81rem;
+	left: 0.25rem;
+	bottom:-2.4rem ;
+	background:#fff ;
+	
+	padding-top: 0.29rem;
+	border-radius: 0.1rem;
+}
+.head_c_b{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 0.75rem;
+}
+.gmnl{
+	width: 100%;
+	display: flex;
+	padding: 0 0.8rem;
+	align-items: center;
+	justify-content: space-between;
+}
+.gmnl button{
+	display: inline-block;
+	width: 2.33rem;
+	height: 0.7rem;
+	border: 1px solid;
+	border-color: rgb(233,66,108);
+	color: rgb(233,66,108);
+	background: #fff;
+	font-size: 0.3rem;
+	text-align: center;
+	line-height: 0.7rem;
+	padding: 0;
+}
+.count{
+	width: 1.21rem;
+	height: 1.21rem;
+	border-radius: 50% 50%;
+	background: rgb(50,177,108);
+	color: #fff;
+	font-size:0.36rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.21rem;
+	margin-bottom: 0.17rem;
+}
+.head_c span{
+	font-size: 0.36rem;
+	font-weight: bold;
+	color: #333;
+}
+.ipt{
+	width: 100%;
+	height: 0.95rem;
+	display: flex;
+	justify-content: center;
+	margin-bottom:0.45rem ;
+}
+.ipt input{
+	width: 6.9rem;
+	height: 100%;
+	border: 1px solid;
+	border-color: #ddd;
+	padding-left: 0.22rem;
+	border-radius: 0.1rem;
+}
+.button{
+	width: 100%;
+	height: 1.03rem;
+	text-align: center;
+}
+.button button{
+	width: 6.1rem;
+	height: 100%;
+	background: rgb(249,78,120);
+	color: #fff;
+	font-size: 0.3rem;
+	border-radius: 2rem;
+	line-height: 1.03rem;
+	margin-top: 1.86rem;
+}
+.currency_detail{
+	display: flex;
+	align-items: center;
+	padding-left:0.3rem ;
+	margin-bottom: 0.29rem;
+}
+.currency_detail img{
+	width: 0.39rem;
+	height: 0.36rem;
+	margin-right:0.24rem ;
+}
+.currency_detail span{
+	font-size: 0.3rem;
+	font-weight: bold;
+	color: #333;
+}
+.currency_detail_content{
+	display: flex;
+	margin: auto;
+	width: 7rem;
+	height: 1.51rem;
+	background: #fff;
+	border-radius: 0.1rem;
+	padding-top: 0.34rem;
+	padding-left: 0.1rem;
+	margin-bottom: 0.2rem;
+}
+.currency_detail_content img{
+	width: 0.9rem;
+	height: 0.9rem;
+	margin-right: 0.42rem;
+}
+.currency_detail_content_c{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	font-size: 0.3rem;
+}
+.time{
+	font-size: 0.24rem;
+}
+.button{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 0.93rem;
+	background:rgb(216,53,96) ;
+	color: #fff;
+	border: 0;
+	text-align: center;
+	line-height: 0.93rem;
+	font-size: 0.3rem;
+	border-radius: 0;
+}

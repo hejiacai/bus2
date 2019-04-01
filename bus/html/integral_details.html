@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>积分明细</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/jifen_income.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+//     if(deviceWidth > 750) {
+//         deviceWidth = 750;
+//     }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.count{
+  		overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  	}
+  	.currency_detail_content img{
+  			border-radius: 50%;
+  	}
+  </style>
+</head>
+<body>
+	<div class="head">
+		<div class="head_c">
+			<div class="count">
+			</div>
+			<span>剩余积分</span>
+		</div>
+	</div>
+	<div class="currency_detail">
+		<img src="../image/能量详情@2x.png" alt="" />
+		<sppan>积分详情</sppan>
+	</div>
+	<div class="box_o" id='box_o'>
+		<script id="text" type="text/html">
+			{{each data as value i}}
+			<div class="currency_detail_content" data-index='{{i}}'>
+				<img src="{{value.headimgurl}}" alt="" />
+				<div class="currency_detail_content_c">
+					<span>{{value.nickname}}</span>
+					<span class="time">{{value.createtime}} {{value.content}}</span>
+				</div>
+			</div>
+			{{/each}}
+		</script>
+	</div>
+	
+</body>
+
+    <script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	   
+	var token;
+	$(function(){
+		token=getUrlParam("token");
+		$.ajax({
+			type:"post",
+			url:"http://bus.liebianzhe.com/api/order/integral_detail",
+			async:true,
+			data:{
+				token:token
+			},
+			success:function(data){
+				console.info(data)
+				var html1 = template('text', data);
+            	document.getElementById('box_o').innerHTML = html1;
+            	$(".count").html(data.integral);
+			},
+			error:function(){
+				console.info("请求失败~");
+			}
+		});
+	})
+	function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+	}
+</script>
+</html>
+

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>商品详情</title>
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+  <link href="../css/imageview.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/swiper-3.4.2.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/gift_detail.css" />
+  <script>
+  var deviceWidth = document.documentElement.clientWidth;
+// if(deviceWidth > 750) {
+//   deviceWidth = 750;
+// }
+ document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style type="text/css">
+  	  .fkfs_body{
+  	  	z-index: 999;
+  	  	}
+  	  .gjmx_c{
+  	  	padding-right: 0.1rem;
+  	  }
+  	  video::-internal-media-controls-download-button {
+			    display:none;
+			}
+			 
+			video::-webkit-media-controls-enclosure {
+			    overflow:hidden;
+			}
+			 
+			video::-webkit-media-controls-panel {
+			    width: calc(100% + 30px);  /*Adjust as needed */
+			}
+			#video{
+			    object-fit: fill;
+			}
+  </style>
+</head>
+<body>
+<div class="fkfs_body" id="fkfs_body"></div>
+<div class="backdrop"></div>
+<div id="aui-slide">
+	    <div class="aui-slide-wrap" id='scroll_p'>
+	    	 			 
+	    </div>
+	    <div class="aui-slide-page-wrap"></div>
+</div>
+	<div class="box_o" id='box_o'>
+	
+  </div>
+	<div class="bottom_nav">
+			<div class="customer">
+				<img src="../image/能量详情@2x.png" alt="" />
+				<span>客服</span>
+			</div>
+			<button class="footer_right">立即兑换</button>
+	</div>
+  
+  
+  
+ 
+    
+</body>
+
+	 <script id="text" type="text/html">
+		 		{{each carousel as value i}}
+		 		<div class="aui-slide-node bg-dark">
+		    		<img src="{{value}}" />
+    		</div>
+		    {{/each}}
+		</script>
+
+	<script id="text1" type="text/html">
+	    <div class="xnr">
+				<div class="exchange_integral" data-id='{{id}}'>
+						<span class="jg">兑换价:</span>
+						<span class="jf">{{integral}}</span>
+						<span class="jf_l">兑换数量: {{alnumber}}</span>
+				</div>
+				<div class="spxq_c" id='spxq_c'> 						 	
+			 		  <p class='bt'>{{goods_name}}</p>
+		      	<p class='nr' style="margin-bottom: 0.2rem;">{{desc}}</p>		
+		      	<p class='nr'>
+		      		{{each attribute as value i}}
+		      			{{value.attr_name}}:
+		      			{{each value.spec_name as v v1}}
+		      					{{v}}
+		      			{{/each}}
+		      		{{/each}}
+		      	</p>
+		  	</div>
+	    </div>
+	    {{if evaluate.length!=0}}
+	    <div class="evaluate">
+	    	 <p class="comment_detail"><span>商品评论({{evaluate.all_count}})</span><a style="color: #FDB3CC;" onclick="select_comment()">查看全部  ></a></p>
+	    	 <p class="nam_detail"><img src="{{evaluate.headimgurl}}" alt=""  style="border-radius: 50%;"/><span>{{evaluate.nickname}}</span></p>
+	    	 <div class="comment">{{evaluate.content}}</div>
+	    	 <div class="comment_img">
+	    	 		{{each evaluate.pic as value i}}
+	    	 			<img src="{{value}}" data-preview-src="" data-preview-group="2"/>
+	    	 		{{/each}}
+	    	 </div>
+	    	 
+	    </div>
+	    {{else}}
+	    	<div class="evaluate evaluate1">
+	    			暂无商品评论
+	    	</div>
+	    {{/if}}
+	    <p class="spxq">商品详情</p>
+	    <div class="sp_detail">{{#detail}}</div>
+
+			
+    	
+	  </script>
+	  <script id="text2" type="text/html">
+	  	<div class="gjmx">
+			 <img src="{{cover}}" alt="" />
+			 <div class="gjmx_c">
+			 	  <span class="jf_c">{{integral}}积分</span>
+			 	  <span class="gjmx_sp">{{goods_name}}</span>
+			 </div>
+		</div>
+		<div class="xzgz">   			
+			{{each attribute as value i}}
+    			<p data-id = "{{i}}" class="attr_name">{{value.attr_name}}</p>
+    			<p class="attr_content">
+    				{{each value.spec_name as data i}}
+    					<span data-id = "{{i}}" class="attr_sce" onclick="chioce(this)">{{data}}</span>
+    				{{/each}}
+    			</p>
+			{{/each}}
+		</div>
+		<div class="count">
+			<span class="count_sp">购买数量</span>
+			<div class="count_c">
+				 <span class="reduce" onclick="reduceNum()">-</span>
+				 <span class="count_num">1</span>
+				 <span class="add" onclick="addNum()">+</span>
+			</div>
+		</div>
+		<div class="fkfs_body_button_box">
+			<button class="fkfs_body_button" onclick="jump()">立即兑换</button>  
+		</div>   	
+	  </script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/mui.previewimage.js"></script>
+<script type="text/javascript" src="../script/mui.zoom.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	      var token;
+	      mui.init();
+	      mui.previewImage();
+	    function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+			 var value=GetRequest('token');
+			 token =value.token
+			 var goods_id=value.gid
+//			 var goods_id=GetRequest('gid'); 
+//			 console.log('你好')
+//	      console.log(value.token)
+//	      console.log(value.gid)
+			function select_comment(){
+					window.location.href="all_comment.html?token="+token+"&gid="+goods_id;
+			}
+	   	function reduceNum(){
+				var n=$('.count_num').html();
+				var num=parseInt(n)-1;
+				if(num==0){return;};
+				$('.count_num').html(num);
+			}
+			function addNum(){		
+				var n=$('.count_num').html();
+				var num=parseInt(n)+1;
+				if(num==11){return;};
+				$('.count_num').html(num);
+			}
+	   
+			$(".backdrop").on('tap',function(){
+				$(".bottom_nav").show(); 
+				$(".backdrop,.fkfs_body").hide();
+			})
+//			点击计算显示
+			$(".footer_right").on('tap',function(){
+					$(".bottom_nav").hide();
+					$(".fkfs_body,.backdrop").show();
+			})
+//			点击返回箭头消失
+			$(".return").on('tap',function(){
+				$(".bottom_nav").show();
+				$(".backdrop,.fkfs_body").hide();
+			})
+			
+			var attribute_id;
+			 var attr_name_id;
+			 var attribute={};
+			function chioce(t){
+				 attribute_id=$(t).data('id');//规格id
+				 attr_name_id=$('.attr_name').data('id');//商品属性id
+				 $(t).css('color','red');
+				 $(t).siblings().css('color','#333');
+				 attribute[attr_name_id]=attribute_id;
+				 console.info(attribute);
+			}
+			
+			function jump(){
+				
+
+				var num=$('.count_num').html();//数量
+
+				var order_data={};
+				
+				console.info(token);
+				
+				
+					  
+				order_data["attribute"]=attribute;//规格id
+				order_data['token']=token;
+				order_data['gid']=goods_id;
+				order_data['attr_name_id']=attr_name_id;
+				order_data['num']=num
+        var session =window.sessionStorage;
+        
+        if($.isEmptyObject(attribute)){
+        		mui.toast("请先选择规格~");
+        	
+        		return false;
+        }
+        console.info($.isEmptyObject(attribute));
+         
+         attribute=JSON.stringify(attribute);
+         	console.info(attribute);
+        $.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/order/place_order",
+               data: {'token':token,'gid':goods_id,'num':num,'attribute':attribute}, 	
+               async:false,
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+			                      ordernum=data.data;
+			                    	console.info(ordernum);
+			                    	session.setItem('ordernum',JSON.stringify(ordernum))
+											      session.setItem("order_data",JSON.stringify(order_data));
+											      window.location.href = "confirm_order.html";
+                        }else{
+                        	mui.toast(data.msg);
+                        }
+                 }
+           })
+			}
+					
+
+						$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/order/goods_details",
+               data: {'gid':goods_id,'token':token}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+		//                      console.log(data.data.attribute);
+		                        var html = template('text',data.data);
+														document.getElementById('scroll_p').innerHTML = html;
+														var html1 = template('text1', data.data);
+														document.getElementById('box_o').innerHTML = html1;
+														var html2 = template('text2', data.data);
+														document.getElementById('fkfs_body').innerHTML = html2;
+														var slide = new auiSlide({
+											        container:document.getElementById("aui-slide"),
+											        // "width":300,
+											        "height":260,
+											        "speed":300,
+											        "pageShow":true,
+											        "pageStyle":'dot',
+											        "autoPlay": 0, //自动播放
+											        "loop":true,
+											        'dotPosition':'center',
+											//      currentPage:currentFun
+											    })
+                        }
+                 }
+           })
+			function video_error(){
+					mui.toast("播放文件已损坏");
+			}
+//			function dj_video(){
+//					console.info("aaa");
+//					$(this).css('width','100%');
+//			}
+</script>
+</html>

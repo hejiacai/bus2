@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>手机登录</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+      <link rel="stylesheet" type="text/css" href="../css/shouji_login.css" />
+      <script>
+      var deviceWidth = document.documentElement.clientWidth;
+     if(deviceWidth > 750) {
+         deviceWidth = 750;
+     }
+     document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+    	</script>
+  </head>
+  <body >
+    <p class="sjdl">
+      手机登录
+    </p>
+    <div class="ip_sj">
+      <input type="text" name="" id="" placeholder="请输入您的手机号码" class="sjh">
+    </div>
+    <div class="ip_mm">
+      <input type="text" name="" id="" placeholder="请输入您的密码">
+    </div>
+    <div class="yzm">
+      <a href="">忘记密码</a>
+      <a href="">验证码登录</a>
+    </div>
+  </body>
+  <div class="dl">
+    <button class="dl_b">登录</button>
+  </div>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+      };
+  </script>
+  </html>

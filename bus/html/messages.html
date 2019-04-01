@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>消息</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/messages.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+//     if(deviceWidth > 750) {
+//         deviceWidth = 750;
+//     }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  		.message_num{
+  				width: 0.4rem;
+  				height: 0.4rem;
+  				border-radius: 50%;
+  				background-color: red;
+  				font-size: 0.25rem;
+  				display: flex;
+  				color: white;
+  				align-items: center;
+  				justify-content: center;
+  				margin-right: 0.1rem;
+  				display: none;
+  		}
+  		.xtx{
+  			margin-right: 0;
+  		}
+  		.system_message{
+  				justify-content: space-between;
+  				padding-right: 0.2rem;
+  		}
+  		.system_message_right,.system_message_left{
+  				display: flex;
+  				align-items: center;
+  		}
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+  	<a href="">
+     	<img src="../image/2_03_03.png" alt="">消息
+    </a>
+  </div>-->
+ <section>
+ 	<div class="system_message" data-type='1'>
+ 		<!--<a href="message_remind_delete.html">-->
+ 		<div class="system_message_left">
+	 		<img src="../image/消息3.png" alt="" />
+	 		<span class="xtx">系统消息</span>
+ 		</div>
+ 		<div class="system_message_right">
+	 		<div class="message_num" id="msg1"></div>
+	 		<span>></span>
+ 		</div>
+ 		<!--</a>-->
+ 	</div>
+ </section>
+ <section>
+ 	<div class="system_message" data-type='2'>
+ 		<!--<a href="fans_inform.html">-->
+		<div class="system_message_left">
+	 		<img src="../image/fensi_inform.png" style="width: 0.32rem;height: 0.35rem;" alt="" />
+	 		<span class="xtx">粉丝通知</span>
+ 		</div>
+ 		<div class="system_message_right">
+	 		<div class="message_num" id="msg2"></div>
+	 		<span>></span>
+ 		</div>
+ 		<!--</a>-->
+ 	</div>
+ </section>
+ <section>
+ 	<div class="system_message" data-type='3'>
+ 		<!--<a href="success_friend.html">-->
+		<div class="system_message_left">
+ 			<img src="../image/succeed_friend.png" style="width: 0.35rem;height: 0.35rem;" alt="" />
+ 			<span class="xtx">成功好友</span>
+ 		</div>
+ 		<div class="system_message_right">
+	 		<div class="message_num" id="msg3"></div>
+	 		<span>></span>
+ 		</div>
+ 		</a>
+ 	</div>
+ </section>
+ <section>
+ 	<div class="system_message" data-type='4'>
+ 		<!--<a href="help_friend.html">-->
+		<div class="system_message_left">
+	 		<img src="../image/帮助@2x.png" alt="" />
+	 		<span class="xtx">帮助好友</span>
+	 	</div>
+ 		<div class="system_message_right">
+	 		<div class="message_num" id="msg4"></div>
+	 		<span>></span>
+ 		</div>
+ 		<!--</a>-->
+ 	</div>
+ </section>
+ <section>
+ 	<div class="system_message" data-type='5'>
+ 		<!--<a href="help_friend.html">-->
+		<div class="system_message_left">
+	 		<img src="../image/消息3.png" alt="" />
+	 		<span class="xtx">消息提醒</span>
+	 	</div>
+ 		<div class="system_message_right">
+	 		<div class="message_num" id="msg5"></div>
+	 		<span>></span>
+ 		</div>
+ 		<!--</a>-->
+ 	</div>
+ </section>
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript">
+	var token;
+		$(function(){
+					
+			 	token=getUrlParam('token');
+				$.ajax({
+					type:"post",
+					url:"http://bus.liebianzhe.com/api/user/index",
+					async:true,
+					data:{
+						token:token
+					},
+					success:function(data){
+						console.info(data);
+						if(data.code==1){
+								if(mui.os.ios){
+										var new_msg={"new_msg":data.data.data.new_msg}
+										console.info(new_msg);
+										window.webkit.messageHandlers.news_msg.postMessage(new_msg);
+								}
+								
+						}
+					},error:function(){
+							console.info("请求失败")
+					}
+				});
+			 $.ajax({
+			 	type:"post",
+			 	url:"http://bus.liebianzhe.com/api/user/unread_msg",
+			 	async:true,
+			 	data:{
+			 			token:token,
+			 	},
+			 	success:function(data){
+			 			console.info(data);
+			 			if(data.code==1){
+			 					if(data.data.msg1>0){
+			 							$("#msg1").css("display","flex");
+			 							$("#msg1").html(data.data.msg1);
+			 					}
+			 					if(data.data.msg2>0){
+			 							$("#msg2").css("display","flex");
+			 							$("#msg2").html(data.data.msg2);
+			 					}
+			 					if(data.data.msg3>0){
+			 							$("#msg3").css("display","flex");
+			 							$("#msg3").html(data.data.msg3);
+			 					}
+			 					if(data.data.msg4>0){
+			 							$("#msg4").css("display","flex");
+			 							$("#msg4").html(data.data.msg4);
+			 					}
+			 					if(data.data.msg5>0){
+			 							$("#msg5").css("display","flex");
+			 							$("#msg5").html(data.data.msg5);
+			 					}
+			 			}
+			 			
+			 	},
+			 	error:function(){
+			 		console.info("请求失败~");
+			 	}
+			 });
+			 
+		})
+		$('.system_message').on('tap',function(){
+				 	var type=$(this).data('type');
+				 	if(type==1){
+				 		window.location.href="message_remind_delete.html?token="+token;
+				 	}else if(type==2){
+				 		window.location.href="fans_inform.html?token="+token;
+				 	}else if(type==3){
+				 		window.location.href="success_friend.html?token="+token;
+				 	}else if(type==4){
+				 		window.location.href="help_friend.html?token="+token+"&type="+type;
+				 	}else if(type==5){
+				 		window.location.href="message_inform.html?token="+token+"&type="+type;
+				 	}
+				 
+			 })
+		function getUrlParam(name){
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>

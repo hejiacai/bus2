@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>粉丝通知</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link href="../css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/fans_inform.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.change{
+  		width: 5rem;
+  	}
+  	.info_img{
+  			border-radius: 50%;
+  	}
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+  	<a href="messages.html">
+     	<img src="../image/2_03_03.png" alt="">粉丝通知
+    </a>
+  </div>-->
+  
+   <div class="info_body" >
+			<ul id="OA_task_1" class="mui-table-view">
+				
+			</ul>
+	</div>
+  <script type="text/html" id="text">
+	{{each data value index}}
+		<li class="mui-table-view-cell li_statu" onclick="jump(this)" data-id='{{value.id}}' data-statu='{{value.status}}'>
+			<div class="mui-slider-right mui-disabled">
+				<a class="mui-btn mui-btn-red" data-id='{{value.id}}' id='delete' onclick="deletes({{value.id}})">删除</a>
+			</div>
+			<div class="mui-slider-handle">
+			  <img src="{{value.headimgurl}}" class="info_img"/>
+				<div class="info_right">
+					<div class="info_title">
+						<span class="nam">{{value.nickname}}</span>
+						<!--<span class="title">{{value.title}}</span>-->
+						<span class="info_title_span">{{value.createtime}}</span>
+					</div>
+					<div class="change">{{value.desc}}</div>
+				</div>
+			</div>
+		</li>
+	{{/each}}
+  </script>
+    <!--<div class="box_o" id='box_o'>
+  		<script type="text/html" id="text">
+				{{each data as value i}}
+					<div class="fans">
+				  	<img src="{{value.headimgurl}}" alt="" />
+				  	<div class="fans_comment">
+				  		<p class="nam">{{value.nickname}}</p>
+				  		<p>{{value.title}}</p>
+							<p>{{value.desc}}</p>  		
+				  	</div>
+				  	<div class="right_b">
+				  		<span>{{value.createtime}}</span>
+				  	</div>
+			  	</div>
+		  	{{/each}}
+			</script>
+	  </div>-->
+	
+ 
+</body>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	      
+	      	mui.init();
+			$(function(){
+				$('#OA_task_1').on('tap', '.mui-btn', function(event) {
+					var elem = this;
+					var li = elem.parentNode.parentNode;
+					var id=$(elem).parents(".mui-table-view-cell").data("id");
+					var type=1;
+					mui.confirm('确认删除该条记录？', 'Hello MUI', btnArray, function(e) {
+						if (e.index == 0) {
+							li.parentNode.removeChild(li);
+							
+							$.ajax({
+					               type: "POST",
+					               url: "http://bus.liebianzhe.com/api/user/act_msg",
+					               data: {token:token,type:type,id:id}, 	
+					               success: function(data){
+					               	console.info(data);
+										if(data.code==1){
+										li.parentNode.removeChild(li);
+										window.location.reload();
+										}else{
+											mui.toast(data.msg);
+										}
+							              	  
+							            },
+						            error:function(){
+									console.info("删除系统消息请求失败~");
+								}
+					               
+					           })
+							
+						} else {
+							setTimeout(function() {
+								$.swipeoutClose(li);
+							}, 0);
+						}
+
+					});
+				});
+				var btnArray = ['确认', '取消'];
+								
+			});
+	      
+	      
+	      
+		    function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+			 var data=GetRequest('token');
+       var token=data.token;
+       console.info(token);
+             var type='2'
+						$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/person_msg",
+               data: {'token':token,'type':type}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+                        	var html1 = template('text', data);
+                        	document.getElementById('OA_task_1').innerHTML = html1;
+                        }
+
+
+                 }
+           })
+</script>
+</html>

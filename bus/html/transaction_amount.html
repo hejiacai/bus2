@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>交易金额</title>
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/transaction_amount.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.currency_detail_content img{
+  			border-radius: 50%;
+  	}
+  </style>
+</head>
+<body>
+	<div class="head">
+		<!--<div class="hd">
+		  	<a href="">
+		     	<img src="../image/4_03.png" alt="">交易金额
+		    </a>
+		</div>-->
+		<div class="head_c">
+			<div class="count">
+			</div>
+			<p>交易金额</p>
+			<div class="but">
+				<button type="button" onclick="withdraw()">立即提现</button>
+				<button type="button" onclick="withdraw_list()">提现记录</button>
+			</div>
+		</div>
+	</div>
+	<div class="income_list">
+	
+		<div class="income_list_c">
+			<a  onclick="tg()">
+			<img src="../image/推广收入.png" alt="" />
+			</a>
+			<span>推广收入</span>
+			
+		</div>
+		
+		<div class="income_list_c">
+			<a  onclick="jf()">
+			<img src="../image/卖出收入@2x.png" alt="" />
+			</a>
+			<span>积分收入</span>
+		</div>
+		<div class="income_list_c">
+			<a  onclick="tc()">
+			<img src="../image/同城收入.png" alt="" />
+			</a>
+			<span>同城收入</span>
+		</div>
+		<div class="income_list_c">
+			<a  onclick="gg()">
+			<img src="../image/广告收入.png" alt="" />
+			</a>
+			<span>广告收入</span>
+		</div>
+	</div>
+	<div class="currency_detail">
+		<img src="../image/能量详情@2x.png" alt="" />
+		<sppan>交易详细</sppan>
+	</div>
+	<div class="box_o" id='box_o'>
+		<script id="text" type="text/html">
+			{{each data as value i}}
+			<div class="currency_detail_content" data-index='{{i}}'>
+				<img src="{{value.headimgurl}}" alt="" />
+				<div class="currency_detail_content_c">
+					<span>{{value.nickname}}</span>
+					<span class="time">{{value.createtime}} {{value.content}}</span>
+				</div>
+			</div>
+			{{/each}}
+		</script>
+	</div>
+</body>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	   var token;
+	   //提现金额
+	   var price;
+	   //是否绑定支付宝，0为未绑定，1为已绑定.默认为0；
+	   var alipay_type=0;
+	   //是否绑定银行卡，0为未绑定，1为已绑定.默认为0；
+	   var bank_type=0;
+		    function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+			 token=GetRequest('token');
+				token=token.token;
+        var type='5'
+						$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/income_list",
+               data: {'token':token,'type':type}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+                        	var html1 = template('text', data);
+                        	document.getElementById('box_o').innerHTML = html1;
+                        	
+                        }
+
+
+                 }
+           })
+						$.ajax({
+							type: "post",
+							url: "http://bus.liebianzhe.com/api/user/get_user_data",
+							async: true,
+							data: {
+								token: token,
+							},
+							success: function(data) {
+								console.info(data);
+								if(data.code==1){
+									price=data.data.balance;
+									$(".count").html(data.data.balance+"元");
+									if(data.data.alipay_id){
+											alipay_type=1;
+									}
+									if(data.data.bank_card){
+											bank_type=1;
+									}
+									var session=window.sessionStorage;
+									var bd_type={};
+									bd_type["alipay_type"]=alipay_type;
+									bd_type["bank_type"]=bank_type;
+									session.setItem("bd_type",JSON.stringify(bd_type));
+								}
+							},
+							error: function() {
+								console.info("请求失败~");
+							}
+						});
+				function tg(){
+						window.location.href="tuiguang_income.html?token="+token;
+				}
+				function jf(){
+						window.location.href="jifen_income.html?token="+token;
+				}
+				function tc(){
+						window.location.href="tongcheng_income.html?token="+token;
+				}
+				function gg(){
+						window.location.href="advertising_income.html?token="+token;
+				}
+				function withdraw_list(){
+						window.location.href="withdraw.html?token="+token;
+				}
+				function withdraw(){
+					console.info(price);
+					if(price==0){
+								mui.toast("提现金额不足");
+								return false;
+						}
+						window.location.href="withdraw_center.html?token="+token+"&type=2";
+				}
+</script>
+</html>

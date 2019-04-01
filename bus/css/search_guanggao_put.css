@@ -1,0 +1,72 @@
+html,body{
+	background: rgb(234,233,238);
+}
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+  margin-bottom: 0.15rem;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.img{
+	width: 100%;
+	height: 2.33rem;
+	text-align: center;
+	margin-bottom: 0.31rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.img img{
+	width: 2.33rem;
+	height: 2.33rem;
+}
+.message{
+	font-size: 0.3rem;
+	color: #333;
+	text-align: center;
+}
+.guanggao_detail{
+	width: 7rem;
+	height: 1.51rem;
+	background:rgb(255,255,255) ;
+	box-shadow: 0 0 1px 0 #ddd;
+	display: flex;
+	padding: 0.32rem 0.11rem 0 0.19rem;
+	justify-content: space-between;
+	margin: auto;
+	border-radius: 0.1rem;
+	margin-bottom: 0.2rem;
+}
+.guanggao_name{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.guanggao_name_sp{
+	color: #333;
+	font-size: 0.3rem;
+	margin-bottom: 0.25rem;
+}
+.coumt{
+	color: rgb(102,102,102);
+	font-size: 0.24rem;
+}
+.time{
+	color: rgb(51,51,51);
+	font-size: 0.24rem;
+}

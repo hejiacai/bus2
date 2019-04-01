@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>广告详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script>
+		    document.documentElement.style.fontSize =document.documentElement.clientWidth/750*40 +"px";
+		</script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/advert_details.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class=" mui-pull-left" onclick="back()">
+		    	<img src="../image/address_back.png"/>
+		    </a>
+		    <h1 class="mui-title">广告</h1>
+		    <a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" onclick="advertiser_details()">广告主详情</a>
+		</header>
+		<div class="mui-content" id="content">
+		   
+		    
+		    
+		</div>
+		
+		<script id="text" type="text/html">
+			<section>
+				<img src="{{cover}}"/>
+				<p>{{title}}</p>
+				<span>{{content}}</span>
+				<div class="advert_div">
+					<div class="advert_div_left">
+						<img src="../image/yanjing.png"/>
+						<span>{{likes}}次</span>
+					</div>
+					<div class="advert_div_right" onclick="zhuanfa()">
+						<img src="../image/zhuanfa.png"/>
+						<span>{{shares}}条</span>
+					</div>
+				</div>
+			</section>
+		</script>
+		
+		<script src="../script/mui.min.js"></script>
+		<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="../script/common.js"></script>
+		<script type="text/javascript" src="../script/art-template.js"></script>
+		<script type="text/javascript">
+			var token;
+			//广告id
+			var id;
+			//广告的参数
+			var datas;
+		$(function(){
+				token=getUrlParam("token");
+				id=getUrlParam("id");
+				$.ajax({
+						type: "post",
+						url: "http://bus.liebianzhe.com/api/user/advert_edit",
+						data: {
+							token:token,
+							id:id,
+							type:1
+						},
+						success: function(data) {
+								console.info(data);
+								datas=data;
+								if(data.code==1){
+									var html = template('text',data.data);
+									document.getElementById('content').innerHTML = html;
+								}else{
+									mui.toast(data.msg);
+								}
+						},
+						error: function() {
+							console.info("请求失败~");
+						}
+				});
+		})
+		
+//		function address_details(address_id){
+//				window.location.href="edit_adress.html?token="+token+"&address_id="+address_id;
+//				event.stopPropagation();
+//		}
+		function advertiser_details(){
+			window.location.href="guanggao_detail.html?token="+token+"&id="+id;
+		}
+		
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+		function address_info(address_data){
+			console.info(address_data);
+			var seesion=window.sessionStorage;
+			seesion.setItem("address_data",JSON.stringify(address_data));
+			window.location.href="confirm_order.html?address_type="+1;
+		}
+		function back(){
+			window.location.href="confirm_order.html";
+			var u = navigator.userAgent, app = navigator.appVersion;
+	        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+	        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+	        if (isAndroid) {
+	            js.back_confirm_order();
+	        }
+	        if (isiOS) {
+	            var data={"msg":"返回广告列表页面"};
+	            window.webkit.messageHandlers.back_confirm_order.postMessage(data);
+	        }
+		}
+		//点击转发
+		function zhuanfa(){
+			if(mui.os.ios){
+				var data={"id":id};
+	            window.webkit.messageHandlers.zhuanfa.postMessage(datas);
+			}
+			if(mui.os.android){
+				js.zhuanfa(JSON.stringify(datas));
+			}
+		}
+		</script>
+	</body>
+
+</html>

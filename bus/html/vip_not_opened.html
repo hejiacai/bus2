@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>未开通</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script>
+		    document.documentElement.style.fontSize =document.documentElement.clientWidth/750*40 +"px";
+		</script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+		<link rel="stylesheet" href="../css/vip_not_opened.css" />
+	</head>
+
+	<body>
+		
+		<div class="mui-content" id="content">
+		    
+		</div>
+		
+		
+		<script id="text" type="text/html">
+			{{each data as value i}}
+			<div class="not_opened_content">
+		    	<div class="not_opened_content_left">
+		    		<img src="{{value.headimgurl}}"/>
+		    		<span>{{value.nickname}}</span>
+		    	</div>
+		    	<div class="not_opened_content_right">
+		    		<img src="../image/shijian.png"/>
+		    		<span>{{value.add_time}}</span>
+		    			
+		    	</div>
+		    </div>
+		    {{/each}}
+		</script>
+		<script src="../script/mui.min.js"></script>
+		<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="../script/common.js"></script>
+		<script type="text/javascript" src="../script/art-template.js"></script>
+		<script type="text/javascript">
+			var token;
+		$(function(){
+				token=getUrlParam("token");
+				$.ajax({
+						type: "post",
+						url: "http://bus.liebianzhe.com/api/user/undovip",
+						data: {
+							token:token,
+						},
+						success: function(data) {
+								console.info(data);
+								if(data.code==1){
+									if(data.data.length==0){
+										mui.toast("您还没有未开通的团队");
+									}else{
+										var html = template('text',data);
+										document.getElementById('content').innerHTML = html;
+									}
+								}else{
+									mui.toast(data.msg);
+								}
+						},
+						error: function() {
+							console.info("请求失败~");
+						}
+				});
+		})
+		
+//		
+		
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+		
+		</script>
+	</body>
+
+</html>

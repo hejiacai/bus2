@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>消息提醒</title>
+    <!--<link rel="stylesheet" type="text/css" href="../css/aui.css" />-->
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/message_inform.css" />
+    <style type="text/css">
+        .aui-list-item-inner.aui-swipe-handle {
+            overflow-x: hidden;
+            position: relative;
+            z-index: 1;
+            background-color: #ffffff;
+        }
+        .aui-swipe-btn {
+            position: absolute;
+            right: 0;
+            z-index: 0;
+            height: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-flex: 1;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+                    justify-content: space-between;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+                    align-items: center;
+        }
+        .aui-swipe-btn .aui-btn {
+            border-radius: 0;
+            height: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+                    align-items: center;
+
+        }
+        .donghua {
+            -webkit-transition-duration:300ms;
+            transition-duration:300ms;
+        }
+        .box_c{
+        	width: 100%;
+        	display: flex;
+        	align-items: center;
+        	justify-content: space-between;
+        }
+        /*.info_right{
+        	margin-right: 0.5rem;
+        }*/
+       .change{
+       		margin-right: 0;
+       		width: 4.7rem;
+       }
+    </style>
+    <script>
+	  var deviceWidth = document.documentElement.clientWidth;
+	   if(deviceWidth > 750) {
+	     deviceWidth = 750;
+	   }
+	 document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+	<!--<div class="hd">
+		<a href="messages.html">
+			<img src="../image/2_03_03.png" alt="">系统消息
+	    </a>
+    </div>-->
+    <div class="info_body" >
+		<ul id="OA_task_1" class="mui-table-view">
+			
+		</ul>
+	</div>
+	<script type="text/html" id="text">
+	 {{each data value index}}
+		<li class="mui-table-view-cell li_statu" data-id='{{value.id}}' data-statu='{{value.status}}'>
+			<div class="mui-slider-right mui-disabled">
+				<a class="mui-btn mui-btn-red" data-id='{{value.id}}' id='delete' onclick="deletes({{value.id}})">删除</a>
+			</div>
+			<div class="mui-slider-handle">
+				<div class="img">
+					<img src="../image/消息3.png" class="info_img"/>
+				</div>
+				<div class="box_c">
+				<div class="info_right">
+					<div class="info_title">
+						<span class="title">{{value.title}}</span>
+						
+					</div>
+					<div class="change">{{value.desc}}</div>
+				</div>
+				<span class="info_title_span">{{value.createtime}}</span>
+				</div>
+			</div>
+		</li>
+		{{/each}}
+    </script>
+    <!--<div class="aui-content aui-margin-b-15">
+        <ul class="aui-list" id='box_o'>
+	  		<script type="text/html" id="text">
+				{{each data value index}}
+					<li class="aui-list-item detail_id" data-id='{{i}}' >
+		                <div class="aui-list-item-inner aui-swipe-handle" data-id='{{value.id}}' onclick="jump(this)">
+		                	<div class="img" data-status='{{value.status}}'>
+		                       	<img src="../image/消息3.png" alt="" />
+		                       	<div class="xyd"></div>
+	                       	</div>
+		                       	<div class="mesagges_content">
+			                       	<span class="title">{{value.title}}</span>
+			                       	<span class="change">{{value.desc}}</span>
+		                       	</div>
+		                       	<span>{{value.createtime}}</span>
+		                </div>
+		                <div class="aui-swipe-btn">
+		                	<div class="aui-btn aui-btn-info">关闭</div>
+		                    <div class="aui-btn aui-btn-danger">删除</div>
+		                </div>
+		            </li>
+		  		{{/each}}
+			</script>
+        </ul>
+    </div>-->
+</body>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript">
+	        
+	        
+	        	mui.init();
+			$(function(){
+				$('#OA_task_1').on('tap', '.mui-btn', function(event) {
+					var elem = this;
+					var li = elem.parentNode.parentNode;
+					var id=$(elem).parents(".mui-table-view-cell").data("id");
+					var type=1;
+					mui.confirm('确认删除该条记录？','删除', btnArray, function(e) {
+						if (e.index == 0) {
+							li.parentNode.removeChild(li);
+							
+							$.ajax({
+					               type: "POST",
+					               url: "http://bus.liebianzhe.com/api/user/act_msg",
+					               data: {token:token,type:type,id:id}, 	
+					               success: function(data){
+					               	    console.info(data);
+										if(data.code==1){
+//										li.parentNode.removeChild(li);
+										window.location.reload();
+										}else{
+											mui.toast(data.msg);
+										}
+							              	  
+							            },
+						            error:function(){
+									console.info("删除系统消息请求失败~");
+								}
+					               
+					           })
+							
+						} else {
+							setTimeout(function() {
+								$.swipeoutClose(li);
+							}, 0);
+						}
+
+					});
+				});
+				var btnArray = ['确认', '取消'];
+								
+			});
+			
+			
+		    function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+			 var data=GetRequest('token');
+//			 var detail_id=data.detail_id;
+//           var status=data.status;
+  			
+             var token=data.token;
+            var message_id;	
+            
+            $(function(){
+            	 var type='5'
+						$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/person_msg",
+               data: {'token':token,'type':type}, 	
+               success: function(data){
+                        console.log(data);					
+			             var html1 = template('text', data);
+					     document.getElementById('OA_task_1').innerHTML = html1;
+//					     if (data.data.)
+//		              	  $('.li_statu').
+		             }
+           			})
+            })
+             
+		
+		var session =window.sessionStorage;
+			
+//		function jump(t){
+//			var message_id=$(t).data('id');
+//			 var type=3;
+//			 $.ajax({
+//             type: "POST",
+//             url: "http://bus.liebianzhe.com/api/user/act_msg",
+//             data: {'token':token,'type':type,'id':message_id}, 	
+//             success: function(data){					
+//			             var html1 = template('text', data);
+//					     document.getElementById('OA_task_1').innerHTML = html1;
+//		              	  window.location.href='message_detail.html?token='+token+'&message_id='+message_id 
+//		             }
+//        })			
+//		}
+
+</script>
+</html>

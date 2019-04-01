@@ -1,0 +1,109 @@
+html,body{
+	background:rgb(234,233,238) ;
+}
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+  margin-bottom: 0.12rem;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.box_o{
+	margin-top: 0.2rem;
+}
+.fans{
+	width: 7rem;
+	height: 1.7rem;
+	border-radius: 0.1rem;
+	box-shadow: 0 0 1px 0 #ddd;
+	background: #fff;
+	margin: auto;
+	padding: 0.15rem 0.14rem 0 0.14rem;
+	display: flex;
+	margin-bottom: 0.2rem;
+	position: relative;
+justify-content: space-around;
+}
+/*.fans button{
+	position: absolute;
+	right: 0.21rem;
+	top: 0.2rem;
+	width: 1.79rem;
+	height: 0.48rem;
+	border-radius: 0.2rem;
+	background:rgb(216,53,96);
+	color: #fff;
+	text-align: center;
+	line-height: 0.48rem;
+	font-size:0.24rem ;
+	padding: 0;
+}*/
+/*.right_b{
+	display: flex;
+	flex-direction: column;
+	margin-left: 
+}*/
+.right_b {
+	display: flex;
+	flex-direction: column; 
+}
+.right_b button{
+	width: 1.79rem;
+	height: 0.48rem;
+	border-radius: 0.2rem;
+	background:rgb(216,53,96);
+	color: #fff;
+	text-align: center;
+	line-height: 0.48rem;
+	font-size:0.24rem ;
+	padding: 0;
+	margin-bottom:0.5rem;
+}
+.smcw{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.right_b span{
+	font-size:0.24rem ;
+}
+.fans_comment{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-right:0.3rem;
+}
+.fans img{
+	width: 0.88rem;
+	height: 0.88rem;
+	margin-right:0.44rem ;
+}
+.fans_p{
+	color: rgb(102,102,102);
+	font-size: 0.24rem;
+	margin-bottom: 0.08rem;
+	width: 3rem;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.nam{
+	font-size: 0.3rem!important;
+	font-weight: bold;
+	color: #333!important;
+	margin-bottom: 0!important;
+}

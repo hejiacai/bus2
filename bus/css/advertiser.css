@@ -1,0 +1,131 @@
+html,body{
+	background: rgb(234,233,238);
+}
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+  margin-bottom: 0.15rem;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.tf{
+	color: rgb(102,102,102)!important;
+	font-size: 0.24rem;
+}
+.hd span{
+	margin-right: 1.51rem;
+}
+.aui-slide-node{
+	width: 6.93rem;
+	height: 2.9rem;
+}
+#aui-slide{
+	width: 6.93rem;
+	height: 2.9rem;
+	margin: auto;
+	border-radius: 0.1rem;
+	margin-bottom: 0.62rem;
+	}
+#aui-slide img{
+	border-radius: 0.1rem;
+}
+.aui-slide-wrap{
+	border-radius: 0.1rem;
+}
+.int{
+	width: 6.9rem;
+	height: 1.01rem;
+	margin: auto;
+	margin-bottom: 0.71rem;
+	background: #fff;
+}
+#message{
+	width: 100%;
+	height: 100%;
+	box-shadow: 0 0 1px 0 #ddd;
+	background: #fff;
+	border-radius: 0.1rem;	
+	padding-left:0.24rem ;
+}
+.tfts{
+	width: 100%;
+	height: 0.28rem;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.37rem;
+}
+.tfts img{
+	width: 0.12rem;
+	height: 0.26rem;
+	margin-right: 0.2rem;
+}
+.tfts span{
+	font-size: 0.3rem;
+	font-weight: bold;
+	color: #333;
+}
+section{
+	width: 100%;
+	height: 3.27rem;
+	background: #fff;
+	padding: 0.43rem 0.31rem 0 0.31rem;
+	margin-bottom: 1.82rem;
+}
+.tfts_detail{
+	display: flex;
+	justify-content:space-around;
+	margin-bottom: 0.4rem;
+}
+.tfts_detail_sp{
+	width: 2.05rem;
+	height: 1.12rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid;
+	border-color:rgb(249,78,120) ;
+	border-radius: 0.2rem;
+	color: #333;
+	font-weight:bold ;
+}
+.count{
+	font-size: 0.36rem;
+}
+.yuan{
+	font-size: 0.3rem;
+}
+#num{
+	width: 100%;
+	height: 100%;
+	box-shadow: 0 0 1px 0 #ddd;
+	background: #fff;
+	border-radius: 0.1rem;	
+	padding-left:0.24rem ;
+}
+.tj{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 0.93rem;
+	background: rgb(249,78,120);
+	color: #fff;
+	font-size: 0.3rem;
+	border-radius: 0;
+	text-align: center;
+	line-height: 0.93rem;
+}

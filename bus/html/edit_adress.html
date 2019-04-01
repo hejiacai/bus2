@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>添加收货地址</title>
+  <link href="../css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/public.css">
+  <link rel="stylesheet" type="text/css" href="../css/mobileSelect.css">
+  <link href="../css/mui.picker.css" rel="stylesheet" />
+	<link href="../css/mui.poppicker.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/edit_adress.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.but button{
+  		border: none;
+  		padding: 0;
+  	}
+  	.ipt input{
+  		border: none;
+  		margin: 0;
+  		padding: 0;
+  	}
+  	.city{
+  		color: #8F8F93;
+  	}
+  	 	.mui-bar .mui-btn-link{
+	font-size: 0.6rem;
+	color: black;
+}
+.mui-bar{
+	border-bottom: 1px solid #EFEFEF;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: inherit;
+}
+.mui-pull-left img{
+	width: 0.15rem;
+	height: 0.25rem;
+}
+html,body{
+				width: 100%;
+				height: 100%;
+				background-color: white;
+			}
+			.mui-content{
+				width: 100%;
+				height: 100%;
+				background-color: #eae9ee;
+			}
+			#header{
+				display: none;
+			}
+  </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav" id="header">
+		    <a class=" mui-pull-left" onclick="back()">
+		    	<img src="../image/address_back.png"/>
+		    </a>
+		    <h1 class="mui-title">添加收货地址</h1>
+		</header>
+		<div class="mui-content">
+		  	<section>
+		  		<div class="ipt">
+		  			<span>收货人</span>
+		  			<input type="text" name="" id="username" />
+		  		</div>
+		  		<div class="ipt">
+		  			<span>手机号</span>
+		  			<input type="number" name="" id="phone" />
+		  		</div>
+		  		<div class="ipt adres">
+		  			<span>所在地区</span>
+		  			<div class="add_box" id="trigger3">
+		  				<span style="font-size: 0.3rem !important;" id="city" ></span>
+			  			<img src="../image/下一个@3x.png" alt="" />
+		  			</div>
+		  		</div>
+		  		<div class="ipt">
+		  			<span>详细地址</span>
+		  			<input type="text" name="" id="address"/>
+		  		</div>
+		  	</section>
+		  	<div class="adress">
+		  		<div class="aui-list-item-inner">
+		            <div class="aui-list-item-label">
+		                	默认地址
+		            </div>
+		            <div class="track hui_se" data-default="2">
+					  				<div class="indicator switch-off "></div>
+								</div>
+		      </div>
+		  	</div>
+  	
+  	
+		  	<div class="delete1">
+		  		删除收货地址
+		  	</div>
+		  	<div class="but">
+		  		<button id="sub" type="button">保存</button>
+		  	</div>
+  	</div>
+  	<div class="tips">
+	  		<div class="tips_content"> 
+	  			<p>删除收货地址</p>
+	  			<span>确定要删除当前收货地址吗？</span>
+	  		</div>
+  			<div class="tips_xuanze">
+  					<div class="tips_xuanze_div qx">暂时不要</div>
+  					<div class="tips_xuanze_div qd">删除</div>
+  			</div>
+  	</div>
+  	<div class="backdrop"></div>
+</body>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/mui.picker.js" ></script>
+<script type="text/javascript" src="../script/mui.poppicker.js" ></script>
+<script type="text/javascript" src="../script/city.data-3.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+ 
+<script type="text/javascript">
+	var token;
+	var address_id;
+	var address_datas;
+	$(function(){
+		if(mui.os.ios){
+			$("#header").css('display','flex');
+		}
+	})
+	$(document).ready(function () {		
+			mui.init();
+			
+			token=getUrlParam("token");
+			address_id=getUrlParam("address_id");
+			$.ajax({
+				type:"post",
+				url:"http://bus.liebianzhe.com/api/user/set_address",
+				async:true,
+				data:{
+					token:token,
+					type:5,
+					id:address_id
+				},
+				success:function(data){
+						console.info(data);
+						if(data.code==1){
+							  address_datas=data.data;
+								$("#username").val(address_datas.username);
+								$("#phone").val(address_datas.phone);
+								$("#city").html(address_datas.city);
+								$("#address").val(address_datas.address);
+								if(address_datas.default==1){
+										$(".track").attr("data-default",address_datas.default);
+										$('.indicator').removeClass('switch-off').addClass('switch-on');
+										$('.track').removeClass('hui_se').addClass('hong_se');
+								}
+						}else{
+								mui.toast(data.msg);
+						}
+				},
+				error:function(){
+						console.info("请求失败~");
+				}
+			});
+			
+			
+			
+			
+			
+			var _getParam = function(obj, param) {
+					            return obj[param] || '';
+					        };
+			var cityPicker3 = new mui.PopPicker({
+					            layer: 3,
+					            buttons:['取消','确定']
+					        });
+		        cityPicker3.setData(cityData3);
+
+					var choiceAdd = document.querySelector('#trigger3');
+		        var city = document.querySelector('#city');
+		        choiceAdd.addEventListener('tap', function(event) {
+		        		$("input").blur();
+		            cityPicker3.show(function(items) {
+		                city.innerText = _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+//		                city.remove("city");
+		                //返回 false 可以阻止选择框的关闭
+		                //return false;
+		            });
+		        }, false);
+		        // var _btnPick = document.createElement('button')
+		        // $(_btnPick).addClass('mui-btn mui-btn-blue mui-poppicker-btn-ok')
+		        $('.mui-poppicker-header').prepend('请选择区域')
+		        
+		        $('.track').click( function() {
+						    $indicator = $('.indicator');
+						    if( $indicator.hasClass('switch-on') ) {
+						        $indicator.removeClass('switch-on').addClass('switch-off');
+						        $(this).removeClass('hong_se').addClass('hui_se');
+						        }
+						    else {
+						        $indicator.removeClass('switch-off').addClass('switch-on');
+						        $(this).removeClass('hui_se').addClass('hong_se');
+						    }
+						    $.ajax({
+									type:"post",
+									url:"http://bus.liebianzhe.com/api/user/set_address",
+									async:true,
+									data:{
+										token:token,
+										type:3,
+										id:address_id
+									},
+									success:function(data){
+											console.info(data);
+											if(data.code==1){
+													if($(".track").hasClass("hui_se")){
+															$(".track").attr("data-default","2");
+													}else{
+														$(".track").attr("data-default","1");
+													}
+											}else{
+													mui.toast(data.msg);
+											}
+									},
+									error:function(){
+											console.info("请求失败~");
+									}
+								});
+						});
+				
+	});
+	$(".delete1").on('tap',function(){
+			$(".backdrop").show();
+			$(".tips").css("display","flex");
+	})
+	$(".qx").on('tap',function(){
+			$(".backdrop,.tips").hide();
+	})
+	//点击删除
+	$(".qd").on('tap',function(){
+			$.ajax({
+				type:"post",
+				url:"http://bus.liebianzhe.com/api/user/set_address",
+				async:true,
+				data:{
+					token:token,
+					type:4,
+					id:address_id
+				},
+				success:function(data){
+						console.info(data);
+						if(data.code==1){
+								$(".backdrop,.tips").hide();
+								window.location.href="my_adress.html?token="+token;
+						}else{
+								mui.toast(data.msg);
+						}
+				},
+				error:function(){
+						console.info("请求失败~");
+				}
+			});
+	})
+	
+	
+	//点击保存
+	$("#sub").on('tap',function(){
+			var username=$("#username").val();
+			var phone=$("#phone").val();
+			var city=$("#city").text();
+			var address=$("#address").val();
+			var address_default=$('.track').attr("data-default");
+			if(username=="" || phone=="" || address=="" ){
+				mui.toact("请填写完地址信息~");
+				return false;
+			}
+			$.ajax({
+				type:"post",
+				url:"http://bus.liebianzhe.com/api/user/set_address",
+				async:true,
+				data:{
+					token:token,
+					type:2,
+					username:username,
+					phone:phone,
+					city:city,
+					address:address,
+					default:address_default,
+					id:address_id
+				},
+				success:function(data){
+						console.info(data);
+						if(data.code==1){
+								if(mui.os.android){
+										js.baocun();
+								}
+								window.location.href="my_adress.html?token="+token;
+						}else{
+								mui.toast(data.msg);
+						}
+				},
+				error:function(){
+						console.info("请求失败~");
+				}
+			});
+	})
+	function back(){
+			window.location.href="my_adress.html?token="+token;
+	}
+	
+	function getUrlParam(name){
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+		var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		if (r!=null) return unescape(r[2]); return null; //返回参数值
+	}
+	
+</script>
+</html>

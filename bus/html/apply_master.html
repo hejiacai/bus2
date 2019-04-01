@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>申请成为师傅</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/public.css">
+  <link rel="stylesheet" type="text/css" href="../css/mobileSelect.css">
+  <link rel="stylesheet" type="text/css" href="../css/apply_master.css" />
+  <script>
+       //根据屏幕大小改变根元素字体大小
+			(function(doc, win) {
+			    var docEl = doc.documentElement,
+			        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+			        recalc = function() {
+			            var clientWidth = docEl.clientWidth;
+			            if (!clientWidth) return;
+			            if (clientWidth >= 750) { //750这个值，根据设计师的psd宽度来修改，是多少就写多少，现在手机端一般是750px的设计稿，如果设计师给的1920的psd，自己用Photoshop等比例缩小
+			                docEl.style.fontSize = '100px';
+			            } else {
+			                docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'; //750这个值，根据设计师的psd宽度来修改，是多少就写多少，现在手机端一般是750px的设计稿，如果设计师给的1920的psd，自己用Photoshop等比例缩小
+			            }
+			        };		
+			    if (!doc.addEventListener) return;
+			    win.addEventListener(resizeEvt, recalc, false);
+			    doc.addEventListener('DOMContentLoaded', recalc, false);
+			})(document, window);
+  </script>
+</head>
+<body>
+	<div class="hd">
+	    <img src="../image/2_03_03.png" alt="">申请成为师傅
+	</div>
+	<p class="identity">
+		<img src="../image/1@2x.png" alt="" />
+		身份证信息
+	</p>
+	<div class="identity_detail">
+		<div class="inp">
+			<span>姓名</span>
+			<input type="text" placeholder="请输入您的真实姓名" id='mz'/>			
+		</div>
+		<div class="inp">
+			<span>证件号</span>
+			<input type="text" placeholder="请输入证件号(加密处理)" id='mz'/>			
+		</div>
+		<div class="inp">
+			<span>工龄</span>
+			<input type="text" placeholder="请输入你的工龄" id='mz'/>			
+		</div>
+	</div>
+	<p class="identity">
+		<img src="../image/1@2x.png" alt="" />
+		上传身份证照片
+	</p>
+	<div class="indent_photo">
+		<img src="../image/添加身份证.png" alt="" />
+		<p>正面   (带身份证信息)</p>
+	</div>
+	<div class="indent_photo">
+		<img src="../image/添加身份证.png" alt="" />
+		<p>反面   (带国徽照片)</p>
+	</div>
+	<p class="identity">
+		<img src="../image/1@2x.png" alt="" />
+		请选择服务时间
+	</p>
+	<div class="service_time">
+		<div class="times">
+			<div>
+				<span class="month">1个月</span>
+				<span class="yuan">(6元)</span>
+			</div>
+			<div>
+				<span class="month">3个月</span>
+				<span class="yuan">(18元)</span>
+			</div>
+			<div>
+				<span class="month">1年</span>
+				<span class="yuan">(72元)</span>
+			</div>
+		</div>
+		<input type="" name="" id="yf" value="" placeholder="请输入月份1个月6元" class="srje"/>
+		<div class="choice_type">
+			<span class="choic_craft">选择工种</span>
+			<img src="../image/2.png" alt="" id="trigger3"/>
+		</div>
+	</div>
+	<div class="bottom_nav">
+	<button>立即支付</button>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script src="../script/mobileSelect.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var data = new FormData();
+	var mobileSelect3 = new MobileSelect({
+    trigger: '#trigger3',
+    title: '工种选择',
+    wheels: [
+            {data:[
+                  {
+                      id:'1',
+                      value:'木工'},
+                  {id:'2',value:'泥工'},
+                  {id:'3',value:'油漆工'},
+                  {id:'4',value:'电工'},
+                  {id:'5',value:'气焊工'},
+                  {id:'6',value:'钢筋工'}
+              ]}
+            ],
+    position:[0, 1, 0, 1, 0],
+    transitionEnd:function(indexArr, data){
+        //console.log(data);
+    },
+    callback:function(indexArr, data){
+        console.log(data);
+        data.append("data", data);
+        $.ajax({
+            url: "",
+            data: data,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            success: function (data) {
+            	
+                   }                  
+               });
+    }
+});
+</script>
+</html>

@@ -1,0 +1,138 @@
+html,body{
+	background: rgb(234,233,238);
+}
+.hd{
+  width: 100%;
+  height: 1.3rem;
+  padding: 0.58rem 0 0.23rem 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #b2b2b2;
+  background: #fff;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.aui-tab{
+	width: 100%;
+	height: 1.06rem;
+	margin-bottom: 0.21rem;
+}
+.aui-tab-item{
+	width: 50%;
+	height: 100%;
+	font-size: 0.3rem;
+	color: rgb(51,51,51);
+	font-weight: bold;
+	line-height: 1.06rem;
+}
+.aui-tab-item.{
+	color: #333!important;	
+}
+.aui-active{
+	color: #333!important;
+	border-bottom: 2px solid!important;
+	border-bottom-color: rgb(249,78,120)!important;
+}
+.wait_order{
+	width: 6.9rem;
+	height: 2.92rem;
+	margin: auto;
+	margin-bottom: 0.21rem;
+	box-shadow: 0 0 1px 0 #ddd; 
+	background: #fff;
+	padding: 0.18rem 0.15rem ;
+}
+.wait_order_header{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.sj{
+	font-size: 0.24rem;
+	color:rgb(102,102,102) ;
+}
+.send{
+	color: rgb(249,78,120);
+	font-size: 0.3rem;
+	font-weight: bold;
+}
+.wait_order_conment{
+	display: flex;
+	align-items: center;
+}
+.wait_order_conment img{
+	width: 1.74rem;
+	height: 1.38rem;
+	margin-right: 0.35rem;
+}
+.wait_order_conment_detail{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.model{
+	font-size: 0.28rem;
+	color: rgb(51,51,51);
+	font-weight: bold;
+	margin-bottom: 0.28rem;
+}
+.adree{
+	color: rgb(102,102,102);
+	font-size: 0.24rem;
+	margin-bottom: 0.34rem;
+}
+.pay{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.yuan{
+	color: rgb(252,11,11);
+	font-size: 0.24rem;
+	font-weight: bold;
+}
+.coumt{
+	color: rgb(51,51,51);
+	font-size: 0.2rem;
+}
+.deal_detail{
+	width: 7rem;
+	height: 1.51rem;
+	background: #FFFFFF;
+	margin: auto;
+	padding-left:0.08rem ;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.2rem;
+}
+.deal_detail img{
+	width: 0.9rem;
+	height: 0.9rem;
+	margin-right: 0.4rem;
+	display: flex;
+	align-items: center;
+}
+.deal_detail_c{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.nickname{
+	color:rgb(51,51,51);
+	font-size: 0.3rem;
+	margin-bottom: 0.17rem;
+}
+.time{
+	color: rgb(51,51,51);
+	font-size: 0.24rem;
+}

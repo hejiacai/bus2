@@ -1,0 +1,194 @@
+html,body{
+	background: rgb(234,233,238);
+}
+.box{
+	width: 100%;
+	height: 4.13rem;
+	background:#eae9ee;
+	margin-bottom: 0.75rem;
+}
+.head{
+	position: relative;
+	width: 100%;
+	height: 2.85rem;
+	background:rgb(233,66,108) ;
+	margin-bottom: 2.48rem;
+	
+}
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #fff!important;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  margin-bottom: 0.15rem;
+}
+.hd a{
+	color: #fff!important;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.head_c{
+	position: absolute;
+	width: 7rem;
+	height: 3.43rem;
+	left: 0.25rem;
+	bottom:-2.13rem ;
+	background:#fff ;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 0.29rem;
+	border-radius: 0.1rem;
+}
+.count{
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50% 50%;
+	background: rgb(254,205,84);
+	color: #fff;
+	font-size:0.36rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.21rem;
+	margin-bottom: 0.17rem;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.team_head{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin-bottom: 0.57rem;
+}
+.box_c{
+	display: flex;
+	flex-direction: column;
+	margin: 0 0.6rem;
+	width: 33%;
+	align-items: center;
+	justify-content: center;
+}
+.box_c img{
+	width: 1rem;
+	height: 1rem;
+	margin-bottom: 0.32rem;
+}
+.box_c span{
+	color: rgb(51,51,51);
+	font-size: 0.3rem;
+	white-space: nowrap;
+}
+.count_t{
+	background:rgb(255,119,1)!important;
+}
+.count_tr{
+	background: rgb(249,78,120);
+}
+.team_but{
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 0.67rem;
+}
+.team_but button{
+	width: 2.31rem;
+	height: 0.7rem;
+	border: 1px solid;
+	border-color: rgb(249,25,117);
+	color: rgb(249,25,117);
+	background: #fff;
+	text-align: center;
+	line-height: 0.7rem;
+	font-size: 0.3rem;
+	padding: 0;
+}
+.section_head{
+	width: 6.9rem;
+	height: 1.25rem;
+	background: rgb(249,78,120);
+	margin: auto;
+	border-radius: 0.1rem;
+	padding: 0.17rem 0.09rem;
+	display: flex;
+	align-items: center;
+}
+.img{
+	width: 0.9rem;
+	height: 0.9rem;
+	margin-right: 0.43rem;
+}
+.yh{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	margin-right: 1.8rem;
+}
+.mz{
+	text-align: start;
+	width: 1.7rem;
+	color: rgb(255,255,255);
+	font-size: 0.3rem;
+}
+.lb{
+	text-align: start;
+	width: 1.7rem;
+	font-size: 0.24rem;
+	color: rgb(255,255,255);
+}
+.time{
+	display: flex;
+	align-items: center;
+}
+.time img{
+	width: 0.21rem;
+	height: 0.21rem;
+	margin-right: 0.1rem;
+}
+.time span{
+	color: rgb(255,255,255);
+	font-size: 0.24rem;
+}
+section{
+	margin-bottom: 0.19rem;
+}
+.section_content{
+	width: 6.34rem;
+	height: 1.8rem;
+	margin: auto;
+	background: #fff;
+	border-radius: 0 0 0.1rem 0.1rem;
+	display: flex;
+	align-items: center;
+	padding-left: 0.3rem;
+	justify-content: space-between;
+}
+.section_content_sp{
+	width: 33.33%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.xj{
+	color: rgb(102,102,102);
+	font-size: 0.24rem;
+	margin-bottom: 0.39rem;
+}
+.mun{
+	color: rgb(0,0,0);
+	font-size: 0.3rem;
+	font-weight: bold;
+}

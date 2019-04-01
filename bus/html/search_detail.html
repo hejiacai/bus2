@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>查看详情</title>
+  <!--<link rel="stylesheet" type="text/css" href="../css/api.css"/>-->
+  <!--<link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />-->
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link href="../css/mui.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />-->
+  <link rel="stylesheet" type="text/css" href="../css/aui-slide.css" />
+  <link rel="stylesheet" type="text/css" href="../css/swiper-3.4.2.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/search_detail.css" />
+  <script>
+  var deviceWidth = document.documentElement.clientWidth;
+ if(deviceWidth > 750) {
+     deviceWidth = 750;
+ }
+ document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style type="text/css">
+  	 #aui-slide{
+  	 	height: 4.24rem!important;
+  	 }
+  	 .content{
+  	 		width: 6.8rem;
+  	 		font-size: 0.24rem;
+  	 		overflow: hidden;
+  	 		text-overflow: ellipsis;
+  	 		white-space: nowrap;
+  	 		padding-left: 0.07rem;
+  	 }
+  	 .rwx img{
+  	 	border-radius: 50%;
+  	 }
+  	 .bt_c{
+  	 	text-align: left!important;
+  	 	display: flex;
+  	 	justify-content: flex-start;
+  	 	font-size: 0.3rem;
+  	 	padding-left: 0.07rem;
+  	 	margin-bottom: 0.05rem!important;
+  	 }
+  	 /*.rqtu{
+  	 	width: 0.21rem;
+  	 	height: 0.21rem;
+  	 	margin-right: 0.15rem!important;
+  	 }*/
+  		.rq{
+  			margin-top: 0.08rem;
+  		}
+  		.bt{
+  			margin-bottom: 0.5rem;
+  		}
+  	 .rq span{
+  	 	display: flex;
+  	 	align-items: center;
+  	 }
+  	 .rq span img{
+  	 	margin-right: 0.15rem;
+  	 }
+  	 .ljjd{
+  	 	width: 6.1rem;
+    height: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    line-height: 1rem;
+    color: #fff;
+    background: #f9436b;
+    font-size: 0.3rem;
+    font-weight: bold;
+  	 	border: 0;
+  	 	padding: 0;
+  	 }
+  	 .liuyan{
+  	 	width: 1.21rem;
+  	 	height: 0.45rem;
+  	 	border-radius: 2rem;
+  	 	box-shadow: 0 0 1px 0 rgb(249,78,120);
+  	 	text-align: center;
+  	 	line-height: 0.45rem;
+  	 	font-size: 0.24rem;
+  	 	color: rgb(0,0,0);
+  	 	padding: 0;
+  	 	margin-left: 0.12rem;
+  	 	margin-bottom: 0.22rem;
+  	 	background: #fff;
+  	 }
+  	 .sp_o{
+  	 	display: flex;
+  	 	align-items: center;
+  	 }
+  	 .sp_o span{
+  	 	/*white-space: nowrap;*/
+  	 }
+  	 .dz_p{margin-right: 0.15rem;}
+  	 .nr{
+  	 		word-break: break-word;
+  	 }
+  </style>
+</head>
+<body>
+	<div class="box_tow" id='box_tow'>
+		
+  </div>
+  
+</body>
+<script id="text2" type="text/html">
+	    <div class="box">
+	      <div id="aui-slide">
+			    <div class="aui-slide-wrap" id='scroll_p'>
+		 			    {{each pics as value i}}
+						 		<div class="aui-slide-node bg-dark">
+						    		<img src="{{value}}" />
+				    		</div>
+					    {{/each}}
+			    </div>
+			    <div class="aui-slide-page-wrap"></div>
+				</div>
+	    </div>
+	    <div class="xnr">
+	      <p class='bt_c' style="color: black; font-weight: bold;">{{title}}</p>  
+	      <div class="content" style="color: #757575;">{{content}}</div>
+	      <div class="rq">
+	          <div class="sp_o">
+	          <img src="../image/4.7.png" alt=""/ class='rqtu'>
+	           	<span>{{servicetime}}</span>
+	          </div>
+	          <div class="sp_o" style="width: 70%;">
+	              <img src="../image/地址.png" alt="" class="dz_p"/>
+	              <span>{{city}}  {{address}}</span> 
+	          </div>
+	      </div>
+	    </div>
+	    <div class="rwx" id='rwx' data-id='{{id}}'>
+			        <img src="{{headimgurl}}" alt="">
+			        <p class="zmm">{{nickname}}</p>
+			        <p class="lxdh">联系电话:{{phone}}</p>
+			        <button class="liuyan">留言</button>
+			        <div class='nr'>{{content}}</div>
+	    </div>
+	    <div class="bt">
+	    	{{if status==1}}
+		    <button type="button" name="button" class="ljjd" onclick="liji_order(this)">立即接单</button>
+		    {{else if status==2}}
+		    <button type="button" name="button" class="ljjd">已接单</button>
+		    {{else status==3}}
+		    <button type="button" name="button" class="ljjd">已完成</button>
+		    {{/if}}
+		  </div>
+</script>
+ 
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript">
+	
+	  function GetRequest() {  
+									   var url = location.search; //获取url中"?"符后的字串  
+									   var theRequest = new Object();  
+									   if (url.indexOf("?") != -1) {  
+									      var str = url.substr(1);  
+									      strs = str.split("&");  
+									      for(var i = 0; i < strs.length; i ++) {  
+									         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+									      }  
+									   }  
+									   return theRequest; 
+								}
+					 var token=GetRequest('token');
+					 var session=window.sessionStorage;
+					 var master_detail={}
+//					 var id=GetRequest('id');
+		$(function(){				
+				$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/release_edit",
+               data: {'id':token.id,'token':token.token},
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+                        	/*master_detail['address']=data.data.address
+                        	master_detail['city']=data.data.city
+                        	master_detail['content']=data.data.content
+                        	master_detail['headimgurl']=data.data.headimgurl
+                        	master_detail['nickname']=data.data.nickname
+                        	master_detail['id']=data.data.id
+                        	master_detail['phone']=data.data.phone
+                        	master_detail['servicetime']=data.data.servicetime
+                        	session.setItem('master_detail',JSON.stringify(master_detail))*/
+	                        var html = template('text2',data.data);
+													document.getElementById('box_tow').innerHTML = html;
+                        }
+										   var slide = new auiSlide({
+									        container:document.getElementById("aui-slide"),
+									        // "width":300,
+									        "height":260,
+									        "speed":300,
+									        "pageShow":true,
+									        "pageStyle":'dot',
+									        "autoPlay": 0, //自动播放
+									        "loop":true,
+									        'dotPosition':'center',
+									//      currentPage:currentFun
+									    })
+                 }
+        })		 
+		})
+		
+		function liji_order(){
+			var id=$('.rwx').data('id');
+			var type=1;
+			   $.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/act_release",
+               data: {'token':token.token,'type':type,'id':id},
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+	                        	window.location.href='receipt_success.html';
+                        }else{
+                        	window.location.href="unauthentication.html";
+                        }
+			
+                 }
+        })
+		}
+</script>
+</html>

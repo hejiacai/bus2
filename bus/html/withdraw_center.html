@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>提现</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/rechange_center.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  		.ipt:last-child{
+  			border-bottom: none;
+  		}
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+  	<a href="confirm_order.html">
+     <img src="../image/2_03_03.png" alt="">充值中心
+    </a>
+  </div>-->
+<div class="weiixn" id='weiixn'>
+	<div class="ipt" data-type = "1" onclick="zfb()">
+		<div class="ipt_c">
+			<img src="../image/zfb.png" alt="" class="wx_img"/>
+			<span>支付宝提现</span>
+		</div>
+		<img src="../image/4.7png_03.png" alt="" class="dz"/>
+	</div>
+	<div class="ipt" data-type = "2" onclick="yhk()">
+		<div class="ipt_c">
+			<img src="../image/yhk.png" alt="" class="wx_img"/>
+			<span>银行卡提现</span>
+		</div>
+		<img src="../image/4.7png_03.png" alt="" class="dz"/>
+	</div>
+	
+</div>
+
+<div class="bottom_nav">
+	<button class="" onclick="jump()">立即提现</button>
+</div>
+
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+		var token;
+		//1为每日收益提现(仅周一能提现) 2为交易中心提现
+		var type;
+		//跳转状态0为为选，1为支付宝，2为绿色能量
+		var jump_type=0;
+		$(function(){
+				token=getUrlParam("token");
+				type=getUrlParam("type");
+		})
+		
+		function jump(){
+				if(jump_type==1){
+						window.location.href="zfb_withdraw.html?token="+token+"&type="+type;
+				}else if(jump_type==2){
+						window.location.href="yhk_withdraw.html?token="+token+"&type="+type;
+				}
+		}
+		
+		//点击选择
+		$('.ipt').click(function(){
+			 $(this).children('.dz').show()
+			 $(this).siblings().children('.dz').hide();
+			 jump_type=$(this).data("type");
+			 console.info(jump_type);
+		})
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>

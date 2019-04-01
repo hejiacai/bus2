@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>二维码推广</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/tuiguang.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+  <div class="hd">
+  	<a href="">
+     <img src="../image/2_03_03.png" alt="">我要推广
+    </a>
+  </div>
+  <div class="img"><img src="../image/出行有优惠分享能赚钱.png" alt="" /></div>
+  <div class="but">
+  	<button>立即分享给好友</button>
+  </div>
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript">
+
+$(function(){
+		$('.ipt').on('click',function(){
+			$(this).children('.dz').show();
+			$(this).parent().siblings('.weiixn').find('.dz').hide();
+		})
+	})
+</script>
+</html>

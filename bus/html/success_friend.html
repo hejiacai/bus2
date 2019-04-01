@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>成功好友</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/success_friend.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.fans p{
+  		width: 5rem;
+  	}
+  	.fans img{
+  		border-radius: 50%;
+  	}
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+  	<a href="messages.html">
+     	<img src="../image/2_03_03.png" alt="">成功好友
+    </a>
+  </div>-->
+   <div class="box_o" id='box_o'>
+  	<script type="text/html" id="text">
+			{{each data as value i}}
+				<div class="fans">
+			  	<img src="{{value.headimgurl}}" alt="" />
+			  	<div class="fans_comment">
+			  		<p class="nam">{{value.nickname}}</p>
+			  		<p style="color: #333333;">{{value.createtime}} 成功开通服务</p>
+						<p>{{value.desc}}</p>  		
+			  	</div>
+			  </div>
+	  	{{/each}}
+		</script>
+  </div>
+  <!--<div class="fans">
+  	<img src="../image/头像.png" alt="" />
+  	<div class="fans_comment">
+  		<p class="nam">Dero Hu</p>
+  		<p>2018-11-30</p>
+			<p>用户扫码注册成功成为你的粉丝</p>  		
+  	</div>
+  </div>-->
+  <!--<div class="fans">
+  	<img src="../image/头像.png" alt="" />
+  	<div class="fans_comment">
+  		<p class="nam">Dero Hu</p>
+  		<p>2018-11-30</p>
+		<p>用户扫码注册成功成为你的粉丝</p>  		
+  	</div>
+  </div>
+  <div class="fans">
+  	<img src="../image/头像.png" alt="" />
+  	<div class="fans_comment">
+  		<p class="nam">Dero Hu</p>
+  		<p>2018-11-30</p>
+		<p>用户扫码注册成功成为你的粉丝</p>  		
+  	</div>
+  </div>-->
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+		$(function(){
+				function GetRequest() {  
+								   var url = location.search; //获取url中"?"符后的字串  
+								   var theRequest = new Object();  
+								   if (url.indexOf("?") != -1) {  
+								      var str = url.substr(1);  
+								      strs = str.split("&");  
+								      for(var i = 0; i < strs.length; i ++) {  
+								         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+								      }  
+								   }  
+								   return theRequest; 
+							}
+				 var data=GetRequest('token');
+				 var token=data.token;
+				 console.info(token)
+		    var type=3;
+			$.ajax({
+           type: "POST",
+           url: "http://bus.liebianzhe.com/api/user/person_msg",
+           data: {'type':type,'token':token},
+           success: function(data){
+//         			console.log(data);
+                    console.log(data);
+                    if(data.code==1){
+                    	var html1 = template('text', data);
+                    	document.getElementById('box_o').innerHTML = html1;
+                    }
+
+											
+             }
+     })
+			 
+		})
+		
+</script>
+</html>

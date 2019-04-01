@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>开通会员</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/open_member.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+  <div class="hd">
+  	<a href="">
+     <img src="../image/2_03_03.png" alt="">开通会员
+    </a>
+  </div>
+<div class="weiixn" >
+		<div class="ipt">
+			<img src="../image/分享微信(1).png" alt="" class="wx_img"/>
+			<span>微信</span>
+			<img src="../image/4.7png_03.png" alt="" class="dz"/>
+		</div>
+</div>
+<div class="weiixn" >
+		<div class="ipt">
+			<img src="../image/支付宝.png" alt="" class="wx_img"/>
+			<span class="zfb">支付宝</span>
+			<img src="../image/4.7png_03.png" alt="" class="dz" style="display: none;"/>
+		</div>
+</div>
+<div class="bottom_nav">
+	<button>立即支付</button>
+</div>
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript">
+
+$(function(){
+		$('.ipt').on('click',function(){
+			$(this).children('.dz').show();
+			$(this).parent().siblings('.weiixn').find('.dz').hide();
+		})
+	})
+</script>
+</html>

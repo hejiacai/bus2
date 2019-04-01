@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>分红</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/fenhong2.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.year_choice ul{
+  		height: 100%;
+  	}
+  	.banner_c{
+  	  font-size: 0.25rem!important;	
+  	}
+  	
+  </style>
+</head>
+<body>
+	<!--<div class="hd">
+	  	<a href="">
+	     	<img src="../image/2_03_03.png" alt="">
+	     	<span>每月分红</span>    	
+	    </a>
+	    <a href="" class="fhjl">分红记录</a>
+	</div>-->
+ 	<div class="date">
+ 		<div class="year" id='year'>
+			<div class="date-title">选择年份<img src="../image/1_03.png" alt="" /></div>
+			<div class="year_choice" data-id = "0" id='list_year'>
+ 		  	  
+			</div>
+ 		</div>
+ 		<div class="month" id='month'>
+ 			<div class="date-title">选择月份<img src="../image/1_03.png" alt="" /></div>
+			<div class="year_choice" id='list_month'>
+ 		  	
+			</div>
+ 		</div>
+ 		<div class="day" id='day'>
+ 			<div class="date-title">选择日期<img src="../image/1_03.png" alt="" /></div>
+			<div class="year_choice" id='list_day'>
+ 		  	
+			</div>
+ 		</div>
+ 		<button class="but">确定</button>
+ 	</div>
+ 	<section id='box_o'>
+ 		<script id="text1" type="text/html">
+ 		<div class="box">
+	 		<div class="box_one">
+	 			<span>会员人数{{all_member}}人</span>
+	 			<span>今日新增{{new_member}}人</span>
+	 		</div>
+	 		<div class="box_tow">
+	 			<span>今日点击{{new_advert_click}}条</span>
+	 			<span>本月广告点击数{{all_advert_click}}条</span>
+	 		</div>
+	 		<div class="box_tree">
+	 			<span>本月广告收入{{month_advert_price}}元</span>
+	 		</div>
+	 		<div class="box_four">
+	 			<span>可得分红{{month_money}}元</span>
+	 		</div>
+ 		</div>
+ 		<div class="banner">
+ 			<div class="banner_c tall ">
+ 				<span>总人数</span>
+ 				<!--<span>{{all_member}}</span>-->
+ 			</div>
+ 			<div class="banner_c guanggao">
+ 				<span>总点击广告</span>
+ 				<!--<span>{{all_advert_click}}</span>-->		 		
+ 			</div>
+ 		  <div class="banner_c income">
+ 		  	<span>月广告收入</span>
+ 		  	<!--<span>{{month_advert_price}}</span>-->
+ 		  </div>
+ 			<div class="banner_c share">
+ 				<span>可得分红</span>
+ 				<!--<span>{{month_money}}</span>-->
+ 			</div>
+ 		</div>
+ 		</script>
+ 	</section>
+ 	<div class="button">
+ 		<button type="button" onclick="select_gz()">立即查看发放规则</button>
+ 	</div>
+</body>
+<script id="text2" type="text/html">
+			<ul >
+	   {{each data as value i}}
+	  		<li>{{value}}</li>
+	  {{/each}}
+	  </ul>
+</script>
+<script id="text3" type="text/html">
+	<ul >
+	   {{each data as value i}}
+	  		<li>{{value}}</li>
+	  {{/each}}
+	  </ul>
+</script>
+<script id="text4" type="text/html">
+	   <ul >
+	   {{each data as value i}}
+	  		<li>{{value}}</li>
+	  {{/each}}
+	  </ul>
+</script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script src="../script/laydate.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	   
+//	   laydate.render({
+//			  elem: '#year' //指定元素
+//			});
+	   
+//	   laydate.render({
+//			  elem: '#year'
+//			  ,type: 'year'
+//			});
+//			//年月选择器
+//			laydate.render({
+//			  elem: '#month'
+//			  ,type: 'month'
+//			});
+////			时间选择器
+//			laydate.render({
+//			  elem: '#day'
+//			  ,type: 'time'
+//			});
+			//时间选择器
+//			laydate.render({
+//			  elem: '#day'
+//			  ,type: 'datetime'
+//			});
+	   
+	   //获取1992年到今所有年份,渲染到页面
+	   var yearsList = {
+	   		"data":{}
+	   };
+	   var nomthList={
+	   	'data':{}
+	   }
+	   var dayList={
+	   	'data':{}
+	   }
+	    function getYearsList(yearNum){
+            var d = new Date();
+            var years = d.getFullYear();
+            var yearTotal = years - yearNum;
+            
+            for(var i=0;i<=yearTotal;i++){
+            		yearsList.data[i]=years--;
+            }
+            return yearsList;
+        }
+	     function getMonthList(){
+            var yearNum=1;
+            var yearTotal = 11;
+            
+            for(var i=0;i<=yearTotal;i++){
+            		nomthList.data[i]=yearNum++;
+            }
+            return yearsList;
+        }
+	     
+	     function DayList(){ 
+	     	    var DayTotal=30;
+	     	    var yearNum=1;
+            for(var i=0;i<=DayTotal;i++){
+            		dayList.data[i]=yearNum++;
+            }
+            return yearsList;
+        }
+	    	getYearsList(1992);
+	    	getMonthList();
+	    	DayList();
+       var html2 = template('text2', yearsList);
+			 document.getElementById('list_year').innerHTML = html2;
+			 var html3 = template('text3', nomthList);
+			 document.getElementById('list_month').innerHTML = html3;
+			 var html4 = template('text4', dayList);
+			 document.getElementById('list_day').innerHTML = html4;
+		  
+		function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+		 			
+			 var token=GetRequest('token');
+//			 var year;
+//			 var month='14'
+//			 var day='13'
+        $(function(){        	  
+        	  var now = new Date();
+			      var year=now.getFullYear();
+			      var month=now.getMonth()+1;
+			      var day=now.getDate();
+			      console.info(year)
+			      console.info(month)
+			      console.info(day)
+        	  $.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/month_bonus",
+               data: {'token':token.token,'year':year,'month':month,'day':day}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+												var html1 = template('text1', data.data);
+												document.getElementById('box_o').innerHTML = html1;
+ 												 }else{
+ 												 	mui.toast(data.msg);
+ 												 }
+                 }
+           })       	
+        })
+				
+				
+				$('.year,.month,.day').click(function(){
+					  $(this).siblings().find('.year_choice').attr('class','year_choice');
+						if($(this).find('.year_choice').attr('class') == 'year_choice'){
+							$(this).find('.year_choice').attr('class','year_choice active');
+						}else{
+							$(this).find('.year_choice').attr('class','year_choice');
+						}	   	  
+				   })
+				
+				$('.year_choice>ul>li').click(function(){			
+	   	    var date_val = $(this).text();
+					$(this).parents('.year_choice').parent().find('.date-title').text(date_val);
+		//			<!-- $(this).parents('.year_choice').attr('class','year_choice'); -->
+			   });
+			   
+				$('.but').click(function(){
+					   var year=$('.year').find('.date-title').text();
+					   var month=$('.month').find('.date-title').text();
+					   var day=$('.day').find('.date-title').text();
+					   $.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/month_bonus",
+               data: {'token':token.token,'year':year,'month':month,'day':day}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+												var html1 = template('text1', data.data);
+												document.getElementById('box_o').innerHTML = html1;
+ 												 }else{
+ 												 	mui.toast(data.msg);
+ 												 }
+                 }
+           }) 
+				})
+						
+			function select_gz(){
+					window.location.href="issuance_rules.html?token="+token.token;
+			}
+			
+			
+			
+</script>
+</html>
+

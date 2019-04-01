@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绿色能量出售</title>
+  <link href="../css/mui.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/green_energy_pay.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  		.ipt input{
+	  		margin: 0;
+	  		/*padding: 0;*/
+	  	}
+	  	button{
+	  			padding: 0;
+	  	}
+  </style>
+</head>
+<body>
+	<div class="box">
+		<div class="head">
+			<!--<div class="hd">
+			  	<a href="">
+			     	<img src="../image/4_03.png" alt="">绿色能量出售
+			    </a>
+			</div>-->
+			<div class="head_c">
+				<div class="count">
+				</div>
+				<span>我的绿色能量</span>
+			</div>
+		</div>
+	</div>
+	<div class="ipt">
+		<input type="text" name="" id="number" value="" placeholder="请输入出售绿色能量个数" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
+	</div>
+	<div class="ipt">
+		<input type="text" name="" id="one_price" value="" placeholder="请输入出售价格(建议1:1)" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
+	</div>
+	<div class="button">
+		<button type="button" onclick="sell()">立即出售</button>
+	</div>
+</body>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script>
+		var token;
+		$(function(){
+				token=getUrlParam("token");
+				//获取用户最新数据
+				$.ajax({
+						type: "post",
+						url: "http://bus.liebianzhe.com/api/user/get_user_data",
+						async: true,
+						data: {
+							token: token,
+						},
+						success: function(data) {
+							console.info(data);
+							if(data.code==1){
+								$(".count").html(data.data.gpower+"个");
+							}
+						},
+						error: function() {
+							console.info("请求失败~");
+						}
+				});
+				
+		})
+		function sell(){
+				var number=$("#number").val();
+				var one_price=$("#one_price").val();
+				if(number=="" || one_price==""){
+					mui.toast("请填写完出售内容~");
+					return false;
+				}
+				if(one_price==0){
+						mui.toast("出售价格不能为0~~");
+						return false;
+				}
+				if(number==0){
+						mui.toast("出售数量不能为0~~");
+						return false;
+				}
+				var all_price=one_price*number;
+				$.ajax({
+						type: "post",
+						url: "http://bus.liebianzhe.com/api/user/trading_center",
+						async: true,
+						data: {
+							token: token,
+							type:2,
+							one_price:one_price,
+							all_price:all_price,
+							number:number
+						},
+						success: function(data) {
+							console.info(data);
+							if(data.code==1){
+									mui.toast(data.msg);
+									setTimeout(function(){
+										window.location.reload();
+									},1500)
+							}else{
+									mui.toast(data.msg);
+							}
+							
+						},
+						error: function() {
+							console.info("请求失败~");
+						}
+				});
+		}
+		function getUrlParam(name){
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>

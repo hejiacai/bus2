@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>立即付款</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/confirm.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.bottom_nav button{
+  		padding: 0;
+  	}
+  		.product_content p{
+  			margin-bottom: 0;
+  		}
+  		.count_c{
+  				margin-right: 0;
+  		}
+  		.count_c span{
+  			display: flex;
+		    align-items: center;
+		    justify-content: center;
+  		}
+  		.ipt{
+  			justify-content: space-between;
+  		}
+  		.ipt input{
+  			width: 70%;
+  			margin: 0;
+  			padding: 0;
+  			border: none;
+  		}
+  		.sjr{
+  				display: inline-block;
+  				margin-right: 0.5rem;
+  		}
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+  	<a href="gift_detail.html">
+     <img src="../image/2_03_03.png" alt="">确认订单
+    </a>
+  </div>-->
+  <div class="box_o" id='box_o'>
+  <!--<div class="receiver" id='receiver'>
+  		
+  </div>-->
+  
+  
+		  
+  </div>
+  <div class="box_t" id='box_t'></div>
+  <!--<div class="count">
+  	<span>购买数量</span>
+  	<div class="add">
+  		<span>{{}}</span>
+  	</div>
+  </div>-->
+  
+  <div class="ipt">
+  	<span>买家留言</span>
+  	<input type="text" placeholder="请输入留言"/ id='buyer_msg'>
+  </div>
+  <p class="sp_count">
+  	共
+  	<span id="nums"></span>
+  	件商品
+  </p>
+  <div class="bottom_nav">
+  	<div class="pay_integral">
+  		<span class="jf">实付积分:</span>
+  		<span class="jfs"></span>
+  		<span class="hyf">(含运费)</span>
+  	</div>
+  	<button class="tj_o" onclick="jump()">提交订单</button>
+  </div>
+</body>
+<!--<script id="text" type="text/html">
+	{{each data as value i}}
+	  <p>收件人:  {{value.username}}  手机号: {{value.phone}}</p>
+  		<p class="adree" data-id='{{id}}'>收件地址: {{value.city}} {{value.address}}<a href="">></a></p>
+	{{/each}}
+</script>-->
+<script id="text1" type="text/html">
+				<div class="receiver" onclick="jump_address()">
+					  <p>
+					  	<span class="sjr">收件人: </span> 
+					  	<span class="sjr">{{address.username}}</span> 
+					  	{{address.phone}}
+					  </p>
+  					<p class="adree" data-id='{{address.id}}'>收件地址: {{address.city}} {{address.address}}
+  						<a>></a>
+  					</p>
+				</div>
+</script>
+<script id="text3" type="text/html">
+	      <div class="product">产品信息</div>
+		  	<div class="product_detail">
+	  			<img src="{{goods.cover}}" alt="" />
+		  		<div class="product_content">
+		  			<p class="mx">{{goods.goods_name}}</p>
+		  			<p class="specification">{{goods.attribute}}</p>
+		  			<p class="integral">￥{{goods.integral}}</p>
+		  		</div>
+			  </div>
+			  <div class="count">
+					<span class="count_sp">购买数量</span>
+					<div class="count_c">
+						 <span class="reduce" onclick="reduceNum()">-</span>
+						 <span class="count_num">{{goods_num}}</span>
+						 <span class="add" onclick="addNum()">+</span>
+					</div>
+				</div>
+			  <div class="freight">
+			  	<span>运费</span><span>{{transportprice}}元</span>
+			  </div>
+</script>
+<script id="text2" type="text/html">
+				<div class="receiver" onclick="jump_address()">
+					  <p>收件人:  {{username}}   {{phone}}</p>
+  					<p class="adree" data-id='{{address.id}}'>收件地址: {{city}} {{address}}
+  						<a>></a>
+  					</p>
+				</div>
+</script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript">
+		var ordernum;
+		var token;
+		var adress_id;
+		//商品单价
+		var price;
+		//实际支付积分
+		var integral;
+		//运费
+		var transportprice;
+		var data_detail;
+		var session;
+		$(function(){	
+				session =window.sessionStorage;
+				data_detail=session.getItem('order_data');
+				data_detail=JSON.parse(data_detail);
+				
+					 var ordernum = JSON.parse(session.getItem('ordernum'))//获取订单号
+
+					 token=data_detail.token;
+					 console.info(data_detail);
+					 console.info(ordernum)
+					 var address=GetRequest('address_type');
+					var address_type=address.address_type;
+//					console.info(address_type);
+					 
+					 	
+							$.ajax({
+	               type: "POST",
+	               url: "http://bus.liebianzhe.com/api/order/do_order",
+	//             async:false,
+	               data: {'token':token,'ordernum':ordernum}, 	
+	               success: function(data){
+	                console.log(data);
+	                
+	                transportprice=data.data.transportprice*1;
+	                //判断order_datas是否为空
+	                var order_datas=JSON.parse(session.getItem("order_datas"));
+	                if(! order_datas=="" || !order_datas==null){
+	                		data.data["goods_num"]=order_datas.num;
+	                		$("#buyer_msg").val(order_datas.buyer_msg);
+	                		session.removeItem("order_datas");
+	                }
+	                $("#nums").html(data.data.goods_num);
+	                //实际支付积分
+	                integral=((data.data.goods.integral*data.data.goods_num)*1+data.data.transportprice*1).toFixed(2);
+	                price=data.data.goods.integral;
+	                $(".jfs").html(integral);
+	                if(data.data.address!="" || data.data.address!=null){
+	                	adress_id=data.data.address.id;
+	                	console.info(adress_id);
+	                	session.setItem('adress_id',adress_id);
+	                }
+	                        
+	              if(address_type=="" || address_type==null){ 
+	              	
+	              	var html2 = template('text1', data.data);
+	              	document.getElementById('box_o').innerHTML = html2;
+	              	
+	              }else{
+	              	
+							 		var address_data=JSON.parse(session.getItem('address_data'));
+							 		adress_id=address_data.id;
+									session.setItem('adress_id',address_data.id);
+									var adress=address_data.address
+									
+									var city=address_data.city
+									
+									var html3 = template('text2',address_data);
+									
+								document.getElementById('box_o').innerHTML = html3;
+					 }
+						var html5 = template('text3', data.data);
+						document.getElementById('box_t').innerHTML = html5;
+	                 }
+	           })
+						back_gift();
+						
+					
+
+	})
+		
+		function reduceNum(){
+				var n=$('.count_num').html();
+				var num=parseInt(n)-1;
+				if(num==0){return;};
+				$('.count_num,#nums').html(num);
+				integral=((price*num)*1+transportprice).toFixed(2);
+				$(".jfs").html(integral);
+			}
+			function addNum(){		
+				var n=$('.count_num').html();
+				var num=parseInt(n)+1;
+				$('.count_num,#nums').html(num);
+				integral=((price*num)*1+transportprice).toFixed(2);
+				$(".jfs").html(integral);
+			}
+		
+		function back_gift(){
+				var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if (isAndroid) {
+            js.back_gift();
+        }
+        if (isiOS) {
+            var data={"back_type":1};
+            window.webkit.messageHandlers.back_gift.postMessage(data);
+        }
+		}
+		function jump_address(){
+				let num=$(".count_num").text();
+				let buyer_msg=$("#buyer_msg").val();
+				var order_datas={}
+				order_datas["num"]=num;
+				if(! buyer_msg ==null || ! buyer_msg==""){
+						order_datas["buyer_msg"]=buyer_msg;
+				}
+				session.setItem("order_datas",JSON.stringify(order_datas));
+				var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if (isAndroid) {
+            js.jump_address();
+        }
+        if (isiOS) {
+            var data={"msg":"跳转地址列表页面"};
+            window.webkit.messageHandlers.jump_address.postMessage(data);
+        }
+//				window.location.href="my_adress.html?token="+token;
+		}
+		function jump(){
+					console.info(adress_id);
+					
+					if(adress_id=="" || adress_id==null){
+							mui.toast("请先选择地址~");
+							return false;
+					}
+					var session =window.sessionStorage;
+					var buyer_msg=$('#buyer_msg').val();//买家留言
+					if(buyer_msg=="" || buyer_msg==null){
+							buyer_msg="";
+					}
+					var num=$(".count_num").html()
+					data_detail["num"]=num;
+					session.setItem("order_data",JSON.stringify(data_detail));
+					session.setItem('integral',integral);
+					var buyer_msg=session.setItem('buyer_msg',JSON.stringify(buyer_msg));
+		     window.location.href = "integral_pay.html?token="+token;
+		}
+		function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+</script>
+</html>

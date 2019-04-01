@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>联系工人</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/relation_work.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style type="text/css">
+  	 .rwx img{
+  	 	 border-radius: 50%;
+  	 }
+  	 .bt{
+			  display: flex;
+			  justify-content: center;
+			  align-items: center;
+			  width: 100%;
+			  position: fixed;
+			  bottom: 20%;
+			}
+			.bt button{
+  	 	width: 6.1rem;
+    height: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    line-height: 1rem;
+    color: #fff;
+    background: #f9436b;
+    font-size: 0.3rem;
+  	 	border: 0;
+  	 	padding: 0;
+  	 }
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+     <img src="../image/2_03_03.png" alt="">同城服务
+  </div>-->
+
+  <div class="rwx" id='rwx'>
+  	<script id="text" type="text/html">
+  		 {{each data as value i}}
+        <img src="{{value.headimgurl}}" alt="" data-id='{{value.id}}'>
+        <p class="zmm">{{value.nickname}}</p>
+        <p class="seniority">工龄  :{{value.wyears}}年</p>
+        <p class="lxdh">联系电话:{{value.phone}}</p>
+        <!--<p class="lxdh">广告投放日期: 2018-12-12</p>-->
+        <p class="lxdh">服务地点: {{value.city}} {{value.address}}</p>
+        <p class="brief">工人简介:</p>
+        <p class="lynr">{{value.work_desc}}</p>
+        {{/each}}
+    </script>
+	</div>
+	<div class="bt">
+			<button type="button" onclick="ljyy()">立即预约</button>
+	</div>
+</body>
+	<script type="text/javascript" src="../script/aui-slide.js"></script>
+	<script type="text/javascript" src="../script/aui-dialog.js"></script>
+	<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+	<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+	<script type="text/javascript" src="../script/art-template.js" ></script>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script src="../script/mui.min.js"></script>
+	<script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript">
+  	    function GetRequest() {  
+							   var url = location.search; //获取url中"?"符后的字串  
+							   var theRequest = new Object();  
+							   if (url.indexOf("?") != -1) {  
+							      var str = url.substr(1);  
+							      strs = str.split("&");  
+							      for(var i = 0; i < strs.length; i ++) {  
+							         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+							      }  
+							   }  
+							   return theRequest; 
+						}
+			 var token=GetRequest('token');
+			 var token=GetRequest('id');
+			 console.log(token.id);
+			 console.log(token.token);
+			 
+						$.ajax({
+               type: "POST",
+               url: "http://bus.liebianzhe.com/api/user/master_edit",
+               data: {'id':token.id,'token':token.token}, 	
+               success: function(data){
+                        console.log(data);
+                        if(data.code==1){
+                        	var html1 = template('text', data);
+                        	document.getElementById('rwx').innerHTML = html1;
+                        }
+
+                 }
+           })
+						
+						
+			function ljyy(){
+					var u = navigator.userAgent, app = navigator.appVersion;
+	        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+	        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+	        if (isAndroid) {
+	            js.ljyy(token.id);
+	        }
+	        if (isiOS) {
+	            var data={"data":token.id};
+	            window.webkit.messageHandlers.ljyy.postMessage(data);
+	        }
+			}
+  </script>
+</html>

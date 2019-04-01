@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>积分支付</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/integral_pay.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+</head>
+<body>
+  <!--<div class="hd">
+  	<a href="confirm_order.html">
+     <img src="../image/2_03_03.png" alt="">支付
+    </a>
+  </div>-->
+<div class="weiixn" id='weiixn'>
+	<div class="ipt">
+		<img src="../image/积分.png" alt="" class="wx_img"/>
+	<span>积分</span>
+	<img src="../image/4.7png_03.png" alt="" class="dz"/>
+	</div>
+</div>
+<div class="bottom_nav">
+	<button class="" onclick="jump()">立即支付</button>
+</div>
+
+</body>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+		var token;
+		$(function(){
+				token=getUrlParam("token");
+			 
+		})
+		function jump(){
+			window.location.href='pay_psw.html?token='+token;
+		}
+		function getUrlParam(name){
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>

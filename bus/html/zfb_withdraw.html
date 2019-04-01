@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>提现</title>
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/change_pay_psw.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  		.ipt{
+  			display: flex;
+    		justify-content: center;
+  		}
+  		.ipt:first-child{
+  				margin-top: 2rem;
+  		}
+  		body{
+	  		background-color: white;
+	  	}
+	  	button{
+	  		padding: 0;
+	  	}
+	  	.mui-content{
+	  		background-color: white;
+	  	}
+  </style>
+</head>
+<body>
+	<!--<div class="hd">
+	  	<a href="">
+	     	<img src="../image/2_03_03.png" alt="">支付宝
+	    </a>
+	</div>-->
+	<div class="mui-content" id="content">
+	 	
+	</div>
+</body>
+<script type="text/html" id="text">
+		{{if alipay_type==0}}
+		<div class="ipt" >
+	 		<input type="text"  id="ali_card"   placeholder="请输入支付宝账号"/>
+	 	</div>
+	 	<div class="ipt" >
+	 		<input type="text"  id="reali_card"  placeholder="请确认支付宝账号" />
+	 	</div>
+	 	<div class="ipt">
+	 		<input type="text"  id="ali_name"  placeholder="请输入支付宝姓名" />
+	 	</div>
+	 	<div class="ipt xg">
+	 		<input type="number"  id="price"  placeholder="请输入提现金额" />
+	 	</div>
+	 	{{else}}
+	 	<div class="ipt xg" style="margin-top: 1rem;">
+	 		<input type="number"  id="price"  placeholder="请输入提现金额" />
+	 	</div>
+	 	{{/if}}
+	 	<div class="button" >
+	 		<button type="button">立即提现</button>
+	 	</div>
+</script>
+<script type="text/javascript" src="../script/mui.min.js" ></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/art-template.js"></script>
+<script>
+		var token;  
+		var type;
+		var session=window.sessionStorage;
+		var bd_type;
+		$(function(){
+				token=getUrlParam("token");
+				type=getUrlParam("type");
+				bd_type=JSON.parse(session.getItem("bd_type"));
+				var html = template('text',bd_type);
+				document.getElementById('content').innerHTML = html;
+				mui(".button").on('tap','button',function(){
+						$("input").blur();
+						var ali_card=$("#ali_card").val();
+						var reali_card=$("#reali_card").val();
+						var ali_name=$("#ali_name").val();
+						var price=$("#price").val();
+						if(bd_type.alipay_type==0){
+							if(ali_card=="" || reali_card=="" || ali_name=="" ||price==""){
+									mui.toast("提现内容不能为空~~");
+							}else if(! ali_card==reali_card){
+									console.info(ali_card);
+									console.info(reali_card);
+									mui.toast("两次支付宝账号不一致~");
+							}else{
+								$.ajax({
+				          type: "POST",
+				          url: "http://bus.liebianzhe.com/api/user/cash",
+				          data:{
+				          		token:token,
+				          		type:type,
+				          		cash_way:1,
+				          		ali_card:ali_card,
+				          		reali_card:reali_card,
+				          		ali_name:ali_name,
+				          		price:price
+				          },
+				          success: function(data){
+				                console.log(data);
+				                if(data.code==1){
+				                		window.location.href="withdraw_success.html?token="+token;
+				                }else{
+				                	session.setItem("withdraw_info",JSON.stringify(data.msg));
+			   	    						window.location.href="withdraw_fail.html";
+				                }
+				          }
+			      		})
+							}
+						}else if(bd_type.alipay_type==1){
+								if(price=="" || price==null){
+									mui.toast("请输入金额~");
+									return false;
+								}
+								$.ajax({
+				          type: "POST",
+				          url: "http://bus.liebianzhe.com/api/user/cash",
+				          data:{
+				          		token:token,
+				          		type:type,
+				          		cash_way:1,
+				          		price:price
+				          },
+				          success: function(data){
+				                console.log(data);
+				                if(data.code==1){
+				                		window.location.href="withdraw_success.html?token="+token;
+				                }else{
+				                	session.setItem("withdraw_info",JSON.stringify(data.msg));
+			   	    						window.location.href="withdraw_fail.html";
+				                }
+				          }
+			      		})
+						}
+				})
+		})
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+		
+</script>
+</html>

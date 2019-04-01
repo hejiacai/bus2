@@ -1,0 +1,80 @@
+.hd{
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0 0 0.3rem;
+  font-size: 0.36rem;
+  color: #a2a2a2;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background: #fff;
+  border-bottom: 1px solid;
+  border-bottom-color: #ddd;
+  background: #fff;
+  margin-bottom: 0.41rem;
+}
+.hd img{
+  margin-right: 2.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+}
+.ipt{
+	width: 100%;
+	height: 0.95rem;
+	text-align: center;
+	margin-bottom: 0.29rem;
+}
+.ipt input{
+	width: 6.9rem;
+	height: 100%;
+	padding-left: 0.23rem;
+	border: 1px solid;
+	border-color: #ddd;
+	border-radius: 0.05rem;
+	font-size: 0.3rem;
+}
+.button{
+	width: 100%;
+	height: 1.03rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.button button{
+	width: 6.1rem;
+	height: 100%;
+	line-height: 1.03rem;
+	text-align: center;
+	background:rgb(249,78,120) ;
+	border-radius: 1rem;
+	font-size: 0.3rem;
+	color: #fff;
+}
+.xg{
+	margin-bottom: 1.34rem;
+}
+.code{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 0.3rem;
+	margin-bottom: 2.58rem;
+}
+.code button{
+	width: 1.96rem;
+	height: 0.95rem;
+	text-align: center;
+	line-height: 0.95rem;
+	border: 1px solid;
+	border-color: rgb(249,78,120);
+	color: rgb(249,78,120);
+	font-size: 0.3rem;
+	font-weight: bold;
+	background: #fff;
+	padding: 0;
+}
+.code input{
+	width: 4.54rem;
+	height: 0.95rem;
+}

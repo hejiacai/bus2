@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>提现记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script>
+		    document.documentElement.style.fontSize =document.documentElement.clientWidth/750*40 +"px";
+		</script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/withdraw.css" />
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+		    <a class=" mui-pull-left" onclick="back()">
+		    	<img src="../image/address_back.png"/>
+		    </a>
+		    <h1 class="mui-title">绿色币充值</h1>
+		</header>-->
+		<div class="mui-content" id="content">
+			
+		</div>
+		
+		<script id="text" type="text/html">
+			{{each data as value i}}
+			<div class="withdraw_content">
+				<div class="withdraw_content_div">
+					<span>提现成功(已打款)</span>
+					<span class="withdraw_content_div_span">+{{value.price}}</span>
+				</div>
+				<p>{{value.createtime}}</p>
+			</div>
+			{{/each}}
+			<div class="no_more">没有更多了~</div>
+		</script>
+		<script src="../script/mui.min.js"></script>
+		<script type="text/javascript" src="../script/art-template.js"></script>
+		<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="../script/common.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var price=0;
+			var token;
+			$(function(){
+				token=getUrlParam("token");
+                $.ajax({
+                	type:"post",
+                	url:"http://bus.liebianzhe.com/api/user/cash_list",
+                	async:true,
+                	data:{
+                		token:token,
+                		page:1,
+                		pageSize:10
+                	},
+                	success:function(data){
+                		console.info(data);
+                		if(data.code==1){
+                			var html = template('text',data);
+							document.getElementById('content').innerHTML= html;
+                		}else{
+                			mui.toast(data.msg);
+                		}
+                	},
+                	error:function(){
+                		console.info("请求失败")
+                	}
+                });
+			})
+			
+			$(".content_div").on('tap',function(){
+				$(this).addClass('jr_active').siblings().removeClass('jr_active');
+				price=$(this).children(".jiner").html();
+				console.info(price);
+			})
+			
+			$("#sub").on('tap',function(){
+				if(price==0){
+					mui.toast("请选择充值的金额~");
+					return false;
+				}
+				$.ajax({
+					type:"post",
+					url:"http://bus.liebianzhe.com/api/user/recharge",
+					async:true,
+					data:{
+						token:token,
+						price:price,
+                        one_price:0.625
+					},
+					success:function(data){
+						console.info(data);
+						if(data.code==1){
+							var ordernum=data.data.ordernum;
+							window.location.href="jump_pay.html?token="+token+"&ordernum="+ordernum;
+						}else{
+							mui.toast(data.msg);
+						}
+					},
+					error:function(){
+						console.info("充值失败");
+					}
+				});
+			})
+			function getUrlParam(name){
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+			}
+		</script>
+	</body>
+
+</html>

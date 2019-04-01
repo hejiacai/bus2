@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>预约成功</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/order_succeed.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style type="text/css">
+  	  .rwx img {
+    position: absolute;
+    top: -0.55rem;
+    left: 50%;
+    margin-left: -0.55rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    }
+    .button{
+	width: 100%;
+	height: 1.03rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.button button{
+	width: 6.1rem;
+	height: 100%;
+	line-height: 1.03rem;
+	text-align: center;
+	background:rgb(249,78,120) ;
+	border-radius: 1rem;
+	font-size: 0.3rem;
+	color: #fff;
+}
+  </style>
+</head>
+<body>
+  <!--<div class="hd">
+     <img src="../image/2_03_03.png" alt="">同城服务
+  </div>-->
+  <div class="box">
+	  <div class="img">
+	    <img src="../image/4.1_03.png" alt=""/>
+	  </div>
+	  <p class='fb'>预约成功</p>
+	  <p class="gj">赶紧联系师傅吧!</p>
+  </div>
+  <div class="box_o" id='box_o'></div>
+  <!--<div class="button">
+ 		<button type="button" onclick="liji_order(this)">立即预约</button>
+ 	</div>-->
+</body>
+<script id="text" type="text/html">
+		{{each data as value i}}
+				<div class="rwx" data-id='{{value.id}}'>
+        <img src="{{value.headimgurl}}" alt="">
+        <p class="zmm">{{value.nickname}}</p>
+        <p class="seniority">工龄  :{{value.wyears}}年</p>
+        <p class="lxdh">联系电话:{{value.phone}}</p>
+        <!--<p class="lxdh">广告投放日期: {{value.servicetime}}</p>-->
+        <p class="lxdh">服务地点: {{value.city}}  {{value.address}}</p>
+        <p class="brief">工人简介:</p>
+        <p class="lynr">{{value.work_desc}}</p>
+    </div>
+    {{/each}}
+</script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/art-template.js" ></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/swiper-3.4.2.jquery.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+	var token;
+	var wid;
+	$(function(){
+			token=getUrlParam("token");
+			wid=getUrlParam("wid");
+			$.ajax({
+				type:"post",
+				url:"http://bus.liebianzhe.com/api/user/master_edit",
+				async:true,
+				data:{
+						token:token,
+						id:wid
+				},
+				success:function(data){
+					console.info(data);
+					if(data.code==1){
+						var html = template('text',data);								
+						document.getElementById('box_o').innerHTML = html;
+					}
+				},
+				error:function(){
+					console.info("请求失败~");
+				}
+			});
+//		  var session=window.sessionStorage;
+//		  var master_detail=JSON.parse(session.getItem('master_detail'))
+	  	
+//				order_succeed.html
+	})
+	function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>

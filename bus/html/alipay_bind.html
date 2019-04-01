@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绑定支付宝</title>
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/alipay_bind.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style>
+  	.ipt{
+  			display: flex;
+  			justify-content: center;
+  	}
+  	.ipt:first-child{
+				margin-top: 2rem;
+		}
+  	body{
+  		background-color: white;
+  	}
+  	button{
+  		padding: 0;
+  	}
+  </style>
+</head>
+<body>
+	<!--<div class="hd">
+	  	<a href="">
+	     	<img src="../image/2_03_03.png" alt="">绑定支付宝
+	    </a>
+	</div>-->
+ 	<div class="ipt">
+ 		<input type="text"  id="ali_name"  placeholder="请输入支付宝姓名"/>
+ 	</div>
+ 	<div class="ipt">
+ 		<input type="text" name="" id="ali_num"  placeholder="请输入绑定的支付宝"/>
+ 	</div>
+ 	<div class="ipt xg">
+ 		<input type="text" name="" id="rali_num"  placeholder="请确认绑定的支付宝"/>
+ 	</div>
+ 	<div class="button">
+ 		<button type="button">确认修改</button>
+ 	</div>
+</body>
+<script type="text/javascript" src="../script/mui.min.js" ></script>
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script>
+		var token;
+		$(function(){
+				token=getUrlParam("token");
+		})
+		$(".button button").on('tap',function(){
+				var ali_name=$("#ali_name").val();
+				var ali_num=$("#ali_num").val();
+				var rali_num=$("#rali_num").val();
+				if(!ali_num==rali_num){
+						mui.toast("支付宝账号不一致");
+				}else if(ali_name=="" || ali_num=="" || rali_num==""){
+						mui.toast("支付宝账号或姓名不能为空");
+				}else{
+					$.ajax({
+		          type: "POST",
+		          url: "http://bus.liebianzhe.com/api/user/act_user",
+		          data:{
+		          		token:token,
+		          		type:3,
+		          		ali_name:ali_name,
+		          		ali_num:ali_num,
+		          		reali_num:rali_num
+		          },
+		          success: function(data){
+	                console.log(data);
+	                if(data.code==1){
+	                		mui.toast("绑定成功~");
+	                		setTimeout("back_set()",1500);
+	                }else{
+	                	mui.toast(data.msg);
+	                }
+		          }
+	      	})
+				}
+		})
+		function getUrlParam(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+			var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+			if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+		function back_set(){
+	    var u = navigator.userAgent, app = navigator.appVersion;
+	    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+	    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+	    if (isAndroid) {
+	        js.back_set();
+	    }
+	    if (isiOS) {
+	        var data={"msg":"跳转设置页面"};
+	        window.webkit.messageHandlers.back_set.postMessage(data);
+	    }
+		}
+</script>
+</html>

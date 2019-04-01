@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>支付密码</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/aui.2.0.css" />
+  <link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/pay_psw.css" />
+  <script>
+        var deviceWidth = document.documentElement.clientWidth;
+       if(deviceWidth > 750) {
+           deviceWidth = 750;
+       }
+       document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+  </script>
+  <style type="text/css">
+  	  body{
+  	  	background: #fff;
+  	  	padding-top: 1rem;
+  	  }
+  	  .xg{
+  	  	display: flex;
+  	  	justify-content: center;
+  	  	align-items: center;
+  	  }
+  	  .xg input{
+  	  	margin: 0;
+  	  	padding: 0;
+  	  	padding-left: 0.3rem;
+  	  }
+  	  .button button{
+  	  	padding: 0;
+  	  }
+  </style>
+</head>
+<body>
+	<!--<div class="hd">
+	  	<a href="integral_pay.html">
+	     	<img src="../image/2_03_03.png" alt="">支付密码
+	    </a>
+	</div>-->
+
+ 	<div class="ipt xg">
+ 		<input type="password" name="" id="psw" value="" placeholder="请确输入密码"/>
+ 	</div>
+ 	<div class="button">
+ 		<button onclick="confirm_order(this)">确认支付</button>
+ 	</div>
+</body>
+
+<script type="text/javascript" src="../script/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+		var lt_token;
+		var trade_type;
+		//判断从哪个页面跳转过来的状态0为礼品兑换，1为兑换六折能量
+		var lt_state=0;
+		$(function(){
+				lt_token=getUrlParam("token");
+				trade_type=getUrlParam("trade_type");
+				if(trade_type=="" || trade_type==null){
+						lt_state=0;
+				}else{
+					lt_state=1;
+				}
+					function GetRequest() {  
+									   var url = location.search; //获取url中"?"符后的字串  
+									   var theRequest = new Object();  
+									   if (url.indexOf("?") != -1) {  
+									      var str = url.substr(1);  
+									      strs = str.split("&");  
+									      for(var i = 0; i < strs.length; i ++) {  
+									         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+									      }  
+									   }  
+									   return theRequest; 
+								}
+//					 var token=GetRequest('token');	
+					 
+//				var session =window.sessionStorage;
+//				
+//				var data_detail=session.getItem('order_data');
+//				
+//				data_detail=JSON.parse(data_detail);
+//				
+//				var ordernum=JSON.parse(session.getItem('ordernum'))
+//
+//				var adree_detail=JSON.parse(session.getItem('adree_detail'))
+//				
+//				var integral=JSON.parse(session.getItem('integral'))
+//				
+//				var adress_id=JSON.parse(session.getItem('adress_id'))
+//
+//				var pay_pwd=$('#psw').val();
+				
+		})
+//		var token=GetRequest('token');
+   function confirm_order(){
+   	    var pay_pwd=$('#psw').val();
+   	    var session =window.sessionStorage;
+   	    if(pay_pwd=="" || pay_pwd==null){
+   	    	mui.toast("支付密码不能为空~");
+   	    	return false;
+   	    }
+   	    if(lt_state==1){
+   	    		var trade_datas=session.getItem("trade_datas");
+   	    		trade_datas=JSON.parse(trade_datas);
+   	    		console.info(trade_datas);
+   	    		$.ajax({
+   	    			type:"post",
+   	    			url:"http://bus.liebianzhe.com/api/user/sys_buy_green",
+   	    			async:true,
+   	    			data:{
+   	    				token:lt_token,
+   	    				number:trade_datas.all_price,
+//								number:23.3,
+   	    				one_price:trade_datas.one_price,
+//								one_price:0.6,
+   	    				all_price:trade_datas.num,
+// 	    				all_price:14,
+   	    				paypass:pay_pwd
+   	    			},
+   	    			success:function(data){
+   	    				console.info(data);
+   	    					if(data.code==1){
+   	    							window.location.href="success_pay.html?token="+lt_token+"&lt_state="+lt_state;
+   	    					}else{
+   	    						data["token"]=lt_token;
+   	    						session.setItem("pay_info",JSON.stringify(data));
+   	    						window.location.href="pay_fail.html";
+   	    					}
+   	    					session.removeItem("trade_datas");
+   	    			},
+   	    			error:function(){
+   	    					console.info("请求失败~");
+   	    			}
+   	    		});
+   	    		
+   	    }else{
+					var data_detail=session.getItem('order_data');
+					
+					data_detail=JSON.parse(data_detail);
+					
+					var ordernum=JSON.parse(session.getItem('ordernum'))
+	
+					var adree_detail=JSON.parse(session.getItem('buyer_msg'))
+					
+					var integral=JSON.parse(session.getItem('integral'))
+					
+					var adress_id=JSON.parse(session.getItem('adress_id'))
+	
+					console.info(adree_detail);
+					
+					$.ajax({
+	               type: "POST",
+	               url: "http://bus.liebianzhe.com/api/order/pay_order",
+	               data: {'token':data_detail.token,'ordernum':ordernum,'goods_num':data_detail.num,
+	               'buyer_msg':adree_detail,'address_id':adress_id,
+	               'total_integral':integral,'pay_pwd':pay_pwd},
+	               success: function(data){
+	            		console.log(data);
+										if(data.code==0){
+													data["token"]=data_detail.token;
+													data["lt_state"]=lt_state;
+													session.setItem("pay_info",JSON.stringify(data));
+   	    									window.location.href="pay_fail.html";
+										}else{
+												window.location.href="success_pay.html?token="+data_detail.token+"&lt_state="+lt_state;
+										}
+	                 }
+	         })	
+   	    }
+   	    
+				
+         
+    }
+   
+   function getUrlParam(name){
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象var r = window.location.search.substr(1).match(reg);  //匹配目标参数if (r!=null) return unescape(r[2]); return null; //返回参数值} 
+				var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+				if (r!=null) return unescape(r[2]); return null; //返回参数值
+		}
+</script>
+</html>
